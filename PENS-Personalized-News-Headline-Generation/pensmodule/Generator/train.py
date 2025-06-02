@@ -115,7 +115,9 @@ class Trainer(nn.Module):
         pbar = tqdm(train_iter)        
         losses = []
         for i, batch in enumerate(pbar):
-            src, tgt_input, tgt_output = batch[:3]
+# ! 减小每个 batch的数据量，加快cpu发送速度（适当加大迭代最大步数）
+            # src, tgt_input, tgt_output = batch[:3]
+            src, tgt_input, tgt_output = batch[:2]
             src = torch.as_tensor(src, device=self.device).long()
             tgt_input = torch.as_tensor(tgt_input, device=self.device).long()
             tgt_output = torch.as_tensor(tgt_output, device=self.device).long()
