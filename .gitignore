@@ -10,15 +10,5 @@
 *.xlsx
 *.zip
 __pycache__/
-__pycache__/
 *.py[cod]
-*.npy
-*.pkl
-*.pth
-*.pt
-*.h5
-*.ckpt
-*.txt
-*.tsv
-*.csv
-*.xlsx
+
