@@ -12,4 +12,4 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-
+api_config.py
