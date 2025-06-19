@@ -1,0 +1,10 @@
+{
+  "total_users": 103,
+  "total_samples": 200,
+  "avg_history_length": 20.0,
+  "categories": [
+    "lifestyle",
+    "news",
+    "sports"
+  ]
+}

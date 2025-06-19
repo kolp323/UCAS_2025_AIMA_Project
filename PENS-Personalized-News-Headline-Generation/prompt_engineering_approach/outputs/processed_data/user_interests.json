@@ -1,0 +1,826 @@
+{
+  "0": {
+    "categories": [
+      "news",
+      "video",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "1": {
+    "categories": [
+      "news",
+      "sports",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "2": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "3": {
+    "categories": [
+      "news",
+      "foodanddrink",
+      "health"
+    ],
+    "primary_interest": "news"
+  },
+  "4": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "5": {
+    "categories": [
+      "news",
+      "finance",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "6": {
+    "categories": [
+      "news",
+      "finance",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "7": {
+    "categories": [
+      "news",
+      "finance",
+      "music"
+    ],
+    "primary_interest": "news"
+  },
+  "8": {
+    "categories": [
+      "news",
+      "video",
+      "weather"
+    ],
+    "primary_interest": "news"
+  },
+  "9": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "10": {
+    "categories": [
+      "news",
+      "finance",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "11": {
+    "categories": [
+      "news",
+      "tv",
+      "travel"
+    ],
+    "primary_interest": "news"
+  },
+  "12": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "13": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "14": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "15": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "16": {
+    "categories": [
+      "news",
+      "finance",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "17": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "18": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "19": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "20": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "21": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "foodanddrink"
+    ],
+    "primary_interest": "news"
+  },
+  "22": {
+    "categories": [
+      "sports",
+      "news",
+      "entertainment"
+    ],
+    "primary_interest": "sports"
+  },
+  "23": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "24": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "25": {
+    "categories": [
+      "sports",
+      "news",
+      "travel"
+    ],
+    "primary_interest": "sports"
+  },
+  "26": {
+    "categories": [
+      "news",
+      "travel",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "27": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "28": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "29": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "30": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "31": {
+    "categories": [
+      "news",
+      "tv",
+      "movies"
+    ],
+    "primary_interest": "news"
+  },
+  "32": {
+    "categories": [
+      "news",
+      "music",
+      "foodanddrink"
+    ],
+    "primary_interest": "news"
+  },
+  "33": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "movies"
+    ],
+    "primary_interest": "news"
+  },
+  "34": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "foodanddrink"
+    ],
+    "primary_interest": "news"
+  },
+  "35": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "36": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "37": {
+    "categories": [
+      "news",
+      "video",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "38": {
+    "categories": [
+      "news",
+      "sports",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "39": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "weather"
+    ],
+    "primary_interest": "news"
+  },
+  "40": {
+    "categories": [
+      "news",
+      "movies",
+      "tv"
+    ],
+    "primary_interest": "news"
+  },
+  "41": {
+    "categories": [
+      "news",
+      "foodanddrink",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "42": {
+    "categories": [
+      "news",
+      "foodanddrink",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "43": {
+    "categories": [
+      "news",
+      "finance",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "44": {
+    "categories": [
+      "news",
+      "finance",
+      "travel"
+    ],
+    "primary_interest": "news"
+  },
+  "45": {
+    "categories": [
+      "news",
+      "sports",
+      "travel"
+    ],
+    "primary_interest": "news"
+  },
+  "46": {
+    "categories": [
+      "news",
+      "sports",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "47": {
+    "categories": [
+      "news",
+      "sports",
+      "music"
+    ],
+    "primary_interest": "news"
+  },
+  "48": {
+    "categories": [
+      "news",
+      "finance",
+      "travel"
+    ],
+    "primary_interest": "news"
+  },
+  "49": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "50": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "tv"
+    ],
+    "primary_interest": "news"
+  },
+  "51": {
+    "categories": [
+      "news",
+      "music",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "52": {
+    "categories": [
+      "news",
+      "tv",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "53": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "54": {
+    "categories": [
+      "news",
+      "sports",
+      "foodanddrink"
+    ],
+    "primary_interest": "news"
+  },
+  "55": {
+    "categories": [
+      "news",
+      "finance",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "56": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "57": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "58": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "59": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "60": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "61": {
+    "categories": [
+      "news",
+      "lifestyle",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "62": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "63": {
+    "categories": [
+      "news",
+      "travel",
+      "music"
+    ],
+    "primary_interest": "news"
+  },
+  "64": {
+    "categories": [
+      "sports",
+      "news",
+      "travel"
+    ],
+    "primary_interest": "sports"
+  },
+  "65": {
+    "categories": [
+      "news",
+      "tv",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "66": {
+    "categories": [
+      "sports",
+      "news",
+      "music"
+    ],
+    "primary_interest": "sports"
+  },
+  "67": {
+    "categories": [
+      "news",
+      "foodanddrink",
+      "lifestyle"
+    ],
+    "primary_interest": "news"
+  },
+  "68": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "69": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "70": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "71": {
+    "categories": [
+      "sports",
+      "news",
+      "travel"
+    ],
+    "primary_interest": "sports"
+  },
+  "72": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "73": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "74": {
+    "categories": [
+      "sports",
+      "news",
+      "video"
+    ],
+    "primary_interest": "sports"
+  },
+  "75": {
+    "categories": [
+      "news",
+      "finance",
+      "sports"
+    ],
+    "primary_interest": "news"
+  },
+  "76": {
+    "categories": [
+      "news",
+      "tv",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "77": {
+    "categories": [
+      "sports",
+      "news",
+      "tv"
+    ],
+    "primary_interest": "sports"
+  },
+  "78": {
+    "categories": [
+      "news",
+      "sports",
+      "travel"
+    ],
+    "primary_interest": "news"
+  },
+  "79": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "80": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "81": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "82": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "83": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "84": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "85": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "86": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "87": {
+    "categories": [
+      "news",
+      "sports",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "88": {
+    "categories": [
+      "news",
+      "sports",
+      "foodanddrink"
+    ],
+    "primary_interest": "news"
+  },
+  "89": {
+    "categories": [
+      "lifestyle",
+      "news",
+      "movies"
+    ],
+    "primary_interest": "lifestyle"
+  },
+  "90": {
+    "categories": [
+      "news",
+      "sports",
+      "music"
+    ],
+    "primary_interest": "news"
+  },
+  "91": {
+    "categories": [
+      "sports",
+      "news",
+      "tv"
+    ],
+    "primary_interest": "sports"
+  },
+  "92": {
+    "categories": [
+      "news",
+      "finance",
+      "video"
+    ],
+    "primary_interest": "news"
+  },
+  "93": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "94": {
+    "categories": [
+      "sports",
+      "news",
+      "autos"
+    ],
+    "primary_interest": "sports"
+  },
+  "95": {
+    "categories": [
+      "sports",
+      "news",
+      "foodanddrink"
+    ],
+    "primary_interest": "sports"
+  },
+  "96": {
+    "categories": [
+      "sports",
+      "finance",
+      "news"
+    ],
+    "primary_interest": "sports"
+  },
+  "97": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "98": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "99": {
+    "categories": [
+      "news",
+      "video",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "100": {
+    "categories": [
+      "news",
+      "sports",
+      "finance"
+    ],
+    "primary_interest": "news"
+  },
+  "101": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  },
+  "102": {
+    "categories": [
+      "sports",
+      "news",
+      "finance"
+    ],
+    "primary_interest": "sports"
+  }
+}
