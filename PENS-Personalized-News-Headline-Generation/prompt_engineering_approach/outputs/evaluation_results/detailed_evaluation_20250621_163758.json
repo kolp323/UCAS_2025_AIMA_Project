@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-06-21 16:37:58",
+  "evaluation_results": {
+    "basic_stats": {
+      "total_samples": 20,
+      "valid_samples": 20,
+      "success_rate": 1.0,
+      "avg_generated_length": 74.2,
+      "avg_reference_length": 51.55
+    },
+    "rouge_scores": {
+      "simple_char_overlap": 0.762971096218808,
+      "simple_word_overlap": 0.1560960227852643,
+      "length_similarity": 0.681621242913
+    },
+    "llm_personalization": {
+      "llm_interest_match": 0.65,
+      "llm_interest_match_std": 0.2598076211353316,
+      "llm_category_relevance": 0.5375,
+      "llm_category_relevance_std": 0.13863170633011773,
+      "llm_history_consistency": 0.5125,
+      "llm_history_consistency_std": 0.08926785535678564,
+      "llm_personalization_innovation": 0.5875,
+      "llm_personalization_innovation_std": 0.16723860200324564,
+      "llm_overall_personalization": 0.5,
+      "llm_overall_personalization_std": 0.18708286933869706
+    },
+    "title_quality": {
+      "length_reasonableness": 0.97,
+      "title_diversity": 1.0,
+      "average_length": 74.2
+    },
+    "llm_evaluation": {
+      "llm_quality_score": 0.8149999999999998,
+      "llm_quality_scores": [
+        0.796,
+        0.796,
+        0.796,
+        0.796,
+        0.796,
+        0.7899999999999998,
+        0.7899999999999998,
+        0.7899999999999998,
+        0.7899999999999998,
+        0.7899999999999998,
+        0.8539999999999999,
+        0.8539999999999999,
+        0.8539999999999999,
+        0.8539999999999999,
+        0.8539999999999999,
+        0.8200000000000001,
+        0.8200000000000001,
+        0.8200000000000001,
+        0.8200000000000001,
+        0.8200000000000001
+      ]
+    },
+    "comprehensive_scores": {
+      "rouge_score": 0.0,
+      "llm_quality_score": 0.8149999999999998,
+      "llm_personalization_score": 0.5,
+      "rule_personalization_score": 0.0,
+      "title_quality_score": 0.985,
+      "final_comprehensive_score": 0.46799999999999997
+    },
+    "overall_score": 0.46799999999999997
+  }
+}

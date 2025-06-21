@@ -5,7 +5,7 @@ from torch import nn
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import Counter
-from modules import MultiHeadAttention, AttentionPooling
+from .modules import MultiHeadAttention, AttentionPooling
 
 class NAML(nn.Module):
     def __init__(self, embedding_matrix, category_dict):
