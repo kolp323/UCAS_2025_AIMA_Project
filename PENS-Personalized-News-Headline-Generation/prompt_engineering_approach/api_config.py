@@ -6,7 +6,7 @@ Note: This file contains sensitive information such as API keys and should be ad
 # Basic API Configuration
 API_BASE_CONFIG = {
     'base_url': 'https://api.chavapa.com/v1',
-    'api_key': 'sk-3H2OTq9uCXeUef0z90Bb5b5eD7214dF88aC2Bc97AdAaE7D4',
+    'api_key': '',
     'max_retries': 3,
     'timeout': 60
 }
