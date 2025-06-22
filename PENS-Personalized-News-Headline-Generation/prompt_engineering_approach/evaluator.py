@@ -1,5 +1,5 @@
 """
-评估模块 - 包含大模型API评价和个性化效果评估
+Evaluation module - Contains LLM API evaluation and personalization effect assessment
 """
 
 import os
@@ -14,48 +14,48 @@ import seaborn as sns
 from datetime import datetime
 import re
 
-# 修复ROUGE导入
+# Fix ROUGE import
 try:
     from rouge_score import rouge_scorer
     ROUGE_AVAILABLE = True
 except ImportError:
-    print("警告: rouge_score包未安装，将使用简化的评估方法")
+    print("Warning: rouge_score package not installed, will use simplified evaluation methods")
     ROUGE_AVAILABLE = False
 
 from config import EVALUATION_CONFIG, DATA_PATHS, EVALUATION_MODEL
 from llm_client import LLMClient
 
 class Evaluator:
-    """评估器"""
+    """Evaluator"""
     
     def __init__(self, use_llm_evaluation: bool = True):
         self.logger = self._setup_logger()
         self.rouge_scorer = None
         self.use_llm_evaluation = use_llm_evaluation
         
-        # 初始化LLM客户端用于评估
+        # Initialize LLM client for evaluation
         if use_llm_evaluation:
-            # 直接使用指定的评估模型初始化LLM客户端
+            # Directly use specified evaluation model to initialize LLM client
             self.llm_client = LLMClient(EVALUATION_MODEL)
-            self.logger.info(f"使用 {EVALUATION_MODEL} 进行LLM评估")
+            self.logger.info(f"Using {EVALUATION_MODEL} for LLM evaluation")
         
-        # 初始化ROUGE评估器
+        # Initialize ROUGE evaluator
         if ROUGE_AVAILABLE:
             try:
                 self.rouge_scorer = rouge_scorer.RougeScorer(
                     ['rouge1', 'rouge2', 'rougeL'], 
                     use_stemmer=True
                 )
-                self.logger.info("ROUGE评分器初始化成功")
+                self.logger.info("ROUGE scorer initialized successfully")
             except Exception as e:
-                self.logger.warning(f"ROUGE评分器初始化失败: {e}")
+                self.logger.warning(f"ROUGE scorer initialization failed: {e}")
                 self.rouge_scorer = None
         
-        # 评估结果存储
+        # Evaluation results storage
         self.evaluation_results = {}
         
     def _setup_logger(self):
-        """设置日志"""
+        """Setup logging"""
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -63,26 +63,26 @@ class Evaluator:
         return logging.getLogger(__name__)
     
     def calculate_rouge_scores(self, generated_titles: List[str], reference_titles: List[str]) -> Dict[str, float]:
-        """计算ROUGE分数"""
+        """Calculate ROUGE scores"""
         
         if not self.rouge_scorer:
-            self.logger.warning("ROUGE评估器不可用，使用简化评估")
+            self.logger.warning("ROUGE evaluator not available, using simplified evaluation")
             return self._calculate_simple_scores(generated_titles, reference_titles)
         
         try:
-            # 预处理文本
+            # Preprocess text
             processed_generated = [self._preprocess_text_for_rouge(title) for title in generated_titles]
             processed_reference = [self._preprocess_text_for_rouge(title) for title in reference_titles]
             
-            # 过滤空文本
+            # Filter empty text
             valid_pairs = [(g, r) for g, r in zip(processed_generated, processed_reference) 
                           if g and r and g != "empty text" and r != "empty text"]
             
             if not valid_pairs:
-                self.logger.error("没有有效的文本对进行ROUGE评估")
+                self.logger.error("No valid text pairs for ROUGE evaluation")
                 return {}
             
-            # 计算ROUGE分数
+            # Calculate ROUGE scores
             rouge1_scores = []
             rouge2_scores = []
             rougeL_scores = []
@@ -93,7 +93,7 @@ class Evaluator:
                 rouge2_scores.append(scores['rouge2'])
                 rougeL_scores.append(scores['rougeL'])
             
-            # 计算平均分数
+            # Calculate average scores
             rouge_results = {
                 'rouge1_f': np.mean([score.fmeasure for score in rouge1_scores]),
                 'rouge1_p': np.mean([score.precision for score in rouge1_scores]),
@@ -106,29 +106,29 @@ class Evaluator:
                 'rougeL_r': np.mean([score.recall for score in rougeL_scores]),
             }
             
-            self.logger.info(f"ROUGE评估完成，有效样本数: {len(valid_pairs)}")
+            self.logger.info(f"ROUGE evaluation completed, valid samples: {len(valid_pairs)}")
             return rouge_results
             
         except Exception as e:
-            self.logger.error(f"ROUGE评估失败: {str(e)}")
+            self.logger.error(f"ROUGE evaluation failed: {str(e)}")
             return self._calculate_simple_scores(generated_titles, reference_titles)
     
     def _preprocess_text_for_rouge(self, text: str) -> str:
-        """为ROUGE评估预处理文本"""
+        """Preprocess text for ROUGE evaluation"""
         if not text or not isinstance(text, str):
             return "empty text"
         
-        # 移除多余的空格和换行
+        # Remove extra spaces and line breaks
         text = ' '.join(text.split())
         
-        # 确保文本不为空
+        # Ensure text is not empty
         if not text.strip():
             return "empty text"
             
         return text.strip()
     
     def _calculate_simple_scores(self, generated_titles: List[str], reference_titles: List[str]) -> Dict[str, float]:
-        """简化的评估方法（当ROUGE不可用时）"""
+        """Simplified evaluation method (when ROUGE is not available)"""
         
         scores = {}
         total_pairs = len(generated_titles)
@@ -136,7 +136,7 @@ class Evaluator:
         if total_pairs == 0:
             return scores
         
-        # 计算字符级别的重叠
+        # Calculate character-level overlap
         char_overlaps = []
         word_overlaps = []
         length_ratios = []
@@ -168,7 +168,7 @@ class Evaluator:
                                         user_interests: List[Dict], 
                                         news_categories: List[str],
                                         user_histories: List[List[str]]) -> Dict[str, float]:
-        """个性化效果评估（基于规则）"""
+        """Personalization effectiveness evaluation (rule-based)"""
         
         personalization_scores = []
         category_relevance_scores = []
@@ -183,21 +183,21 @@ class Evaluator:
             
             title_lower = title.lower()
             
-            # 1. 兴趣匹配度评估（改进逻辑）
+            # 1. Interest matching evaluation (improved logic)
             primary_interest = interests.get('primary_interest', '').lower()
             interest_categories = [cat.lower() for cat in interests.get('categories', [])]
             
             interest_score = 0.0
             
-            # 类别直接匹配（权重60%）
+            # Direct category matching (weight 60%)
             if category and category.lower() in interest_categories:
                 interest_score += 0.6
             
-            # 主要兴趣匹配（权重25%）
+            # Primary interest matching (weight 25%)
             if primary_interest and primary_interest in title_lower:
                 interest_score += 0.25
             
-            # 关键词部分匹配（权重15%）
+            # Partial keyword matching (weight 15%)
             if primary_interest:
                 primary_words = primary_interest.split()
                 matched_words = sum(1 for word in primary_words if len(word) > 3 and word in title_lower)
@@ -206,13 +206,13 @@ class Evaluator:
             
             personalization_scores.append(min(interest_score, 1.0))
             
-            # 2. 类别相关性评估（改进）
+            # 2. Category relevance evaluation (improved)
             category_score = 0.0
             if category and interest_categories:
                 if category.lower() in interest_categories:
-                    category_score = 1.0  # 直接匹配
+                    category_score = 1.0  # Direct match
                 else:
-                    # 语义相关性检查
+                    # Semantic relevance check
                     category_words = set(category.lower().split())
                     for cat in interest_categories:
                         cat_words = set(cat.split())
@@ -221,32 +221,32 @@ class Evaluator:
             
             category_relevance_scores.append(category_score)
             
-            # 3. 兴趣一致性评估（更合理）
+            # 3. Interest alignment evaluation (more reasonable)
             alignment_score = 0.0
             if category and interest_categories:
                 if category.lower() in interest_categories:
                     alignment_score = 1.0
                 elif 'news' in interest_categories and category in ['news', 'politics', 'business']:
-                    alignment_score = 0.8  # 新闻相关类别
+                    alignment_score = 0.8  # News-related categories
                 elif 'finance' in interest_categories and category in ['business', 'finance', 'economy']:
-                    alignment_score = 0.8  # 金融相关类别
+                    alignment_score = 0.8  # Finance-related categories
                 else:
-                    alignment_score = 0.4  # 基础分
+                    alignment_score = 0.4  # Base score
             
             interest_alignment_scores.append(alignment_score)
             
-            # 4. 历史相关性评估（改进）
+            # 4. History relevance evaluation (improved)
             history_score = 0.0
             if history and len(history) > 0:
                 title_words = set(title_lower.split())
                 history_words = set()
-                for hist_title in history[:15]:  # 看更多历史
+                for hist_title in history[:15]:  # Look at more history
                     if hist_title:
                         history_words.update(hist_title.lower().split())
                 
                 if history_words:
                     common_words = title_words.intersection(history_words)
-                    # 过滤停用词和短词
+                    # Filter stop words and short words
                     stop_words = {'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'a', 'an'}
                     meaningful_words = [w for w in common_words if len(w) > 3 and w not in stop_words]
                     if title_words:
@@ -261,7 +261,7 @@ class Evaluator:
             'rule_based_history_relevance': np.mean(history_relevance_scores) if history_relevance_scores else 0.0
         }
         
-        # 计算综合规则评分
+        # Calculate comprehensive rule-based score
         results['rule_based_overall'] = (
             results['rule_based_personalization'] * 0.4 +
             results['rule_based_category_relevance'] * 0.25 +
@@ -276,29 +276,29 @@ class Evaluator:
                                    news_categories: List[str],
                                    user_histories: List[List[str]], 
                                    batch_size: int = 5) -> Dict[str, float]:
-        """使用LLM评估个性化效果"""
+        """Use LLM to evaluate personalization effectiveness"""
         
         if not self.use_llm_evaluation or not self.llm_client:
-            self.logger.warning("LLM个性化评估不可用")
+            self.logger.warning("LLM personalization evaluation not available")
             return {}
         
-        system_prompt = """你是一位专业的个性化新闻推荐评估专家。你的任务是对新闻标题的个性化程度进行评分。
+        system_prompt = """You are a professional personalized news recommendation evaluation expert. Your task is to score the personalization level of news headlines.
 
-评估维度 (每个维度0-10分):
-1. 兴趣匹配度: 标题内容与用户兴趣的匹配程度
-2. 类别相关性: 标题与用户偏好类别的相关性  
-3. 历史一致性: 标题与用户历史阅读习惯的一致性
-4. 个性化创新: 标题在个性化方面的创新和吸引力
-5. 综合个性化程度: 整体个性化效果
+Evaluation dimensions (each dimension 0-10 points):
+1. Interest matching: Degree of match between headline content and user interests
+2. Category relevance: Relevance of headline to user preferred categories
+3. History consistency: Consistency with user's historical reading habits
+4. Personalization innovation: Innovation and attractiveness in personalization
+5. Overall personalization: Overall personalization effectiveness
 
-严格按照要求输出：
-- 只输出数字和逗号，不要任何文字说明
-- 每行一个标题的评分，格式：分数1,分数2,分数3,分数4,分数5
-- 分数范围0-10，可以是小数（如8.5）
-- 按照标题顺序依次输出
-- 不要输出任何解释、分析或其他文字
+Strict output requirements:
+- Only output numbers and commas, no text explanations
+- One line per headline evaluation, format: score1,score2,score3,score4,score5
+- Score range 0-10, can be decimal (e.g., 8.5)
+- Output in order of headlines
+- Do not output any explanations, analysis, or other text
 
-示例输出：
+Example output:
 8.5,7.0,9.0,6.5,8.0
 6.0,8.5,5.5,7.0,6.5"""
 
@@ -310,18 +310,18 @@ class Evaluator:
             'overall_personalization': []
         }
         
-        # 分批处理
+        # Process in batches
         for i in range(0, len(generated_titles), batch_size):
             batch_titles = generated_titles[i:i+batch_size]
             batch_interests = user_interests[i:i+batch_size]
             batch_categories = news_categories[i:i+batch_size]
-            # 确保user_histories不为空且长度正确
+            # Ensure user_histories is not empty and has correct length
             if user_histories and len(user_histories) > i:
                 batch_histories = user_histories[i:i+batch_size]
             else:
                 batch_histories = [[] for _ in batch_titles]
             
-            # 构建批次评估提示词
+            # Build batch evaluation prompt
             user_prompt = self._build_personalization_evaluation_prompt(
                 batch_titles, batch_interests, batch_categories, batch_histories)
             
@@ -342,26 +342,26 @@ class Evaluator:
                             all_scores['personalization_innovation'].append(scores[3])
                             all_scores['overall_personalization'].append(scores[4])
                         else:
-                            # 默认中等分数
+                            # Default medium scores
                             for key in all_scores:
                                 all_scores[key].append(5.0)
                 else:
-                    # 添加默认分数
+                    # Add default scores
                     for _ in range(len(batch_titles)):
                         for key in all_scores:
                             all_scores[key].append(5.0)
                             
             except Exception as e:
-                self.logger.error(f"LLM个性化评估失败: {e}")
+                self.logger.error(f"LLM personalization evaluation failed: {e}")
                 for _ in range(len(batch_titles)):
                     for key in all_scores:
                         all_scores[key].append(5.0)
         
-        # 计算平均分数（转换为0-1范围）
+        # Calculate average scores (convert to 0-1 range)
         results = {}
         for key, scores in all_scores.items():
             if scores:
-                results[f'llm_{key}'] = np.mean(scores) / 10.0  # 转换为0-1范围
+                results[f'llm_{key}'] = np.mean(scores) / 10.0  # Convert to 0-1 range
                 results[f'llm_{key}_std'] = np.std(scores) / 10.0
         
         return results
@@ -370,86 +370,86 @@ class Evaluator:
                                                 interests: List[Dict], 
                                                 categories: List[str],
                                                 histories: List[List[str]]) -> str:
-        """构建个性化评估提示词"""
+        """Build personalization evaluation prompt"""
         
-        prompt = "作为个性化新闻推荐评估专家，请对以下每个新闻标题的个性化程度进行评分。\n\n"
+        prompt = "As a personalized news recommendation evaluation expert, please score the personalization level of each news headline below.\n\n"
         
-        prompt += "📋 评估维度（每个维度0-10分）：\n"
-        prompt += "维度1: 兴趣匹配度 - 标题与用户兴趣的匹配程度\n"
-        prompt += "维度2: 类别相关性 - 标题与用户偏好类别的相关性\n"  
-        prompt += "维度3: 历史一致性 - 标题与用户历史阅读的一致性\n"
-        prompt += "维度4: 个性化创新 - 标题的个性化吸引力\n"
-        prompt += "维度5: 综合个性化 - 整体个性化效果\n\n"
+        prompt += "Evaluation dimensions (each dimension 0-10 points):\n"
+        prompt += "Dimension 1: Interest matching - Degree of match between headline and user interests\n"
+        prompt += "Dimension 2: Category relevance - Relevance of headline to user preferred categories\n"  
+        prompt += "Dimension 3: History consistency - Consistency with user's historical reading\n"
+        prompt += "Dimension 4: Personalization innovation - Personalized attractiveness of headline\n"
+        prompt += "Dimension 5: Overall personalization - Overall personalization effectiveness\n\n"
         
-        prompt += "📰 待评估的新闻标题及用户信息：\n"
+        prompt += "News headlines and user information to be evaluated:\n"
         
         for i, (title, interest, category, history) in enumerate(zip(titles, interests, categories, histories)):
-            prompt += f"\n=== 标题 {i+1} ===\n"
-            prompt += f"新闻标题: \"{title}\"\n"
-            prompt += f"新闻类别: {category}\n"
+            prompt += f"\n=== Title {i+1} ===\n"
+            prompt += f"News headline: \"{title}\"\n"
+            prompt += f"News category: {category}\n"
             
-            primary = interest.get('primary_interest', '未知')
+            primary = interest.get('primary_interest', 'Unknown')
             categories_list = interest.get('categories', [])
-            prompt += f"用户兴趣: 主要兴趣={primary}, 偏好类别={categories_list}\n"
+            prompt += f"User interests: Primary interest={primary}, Preferred categories={categories_list}\n"
             
             if history and len(history) > 0:
-                recent = history[:3]  # 显示最近3条
-                prompt += f"阅读历史: {'; '.join(recent)}\n"
+                recent = history[:3]  # Show latest 3 items
+                prompt += f"Reading history: {'; '.join(recent)}\n"
             else:
-                prompt += "阅读历史: 无记录\n"
+                prompt += "Reading history: No records\n"
         
-        prompt += "\n⚠️ 输出要求：\n"
-        prompt += "- 必须按照标题顺序（1到N）依次评分\n"
-        prompt += "- 每行输出一个标题的评分，格式：维度1分数,维度2分数,维度3分数,维度4分数,维度5分数\n"
-        prompt += "- 只输出数字和逗号，不要任何文字说明\n"
-        prompt += "- 分数范围：0-10（可以是小数，如8.5）\n\n"
+        prompt += "\nOutput requirements:\n"
+        prompt += "- Must score in order of headlines (1 to N)\n"
+        prompt += "- Output one line per headline evaluation, format: dimension1_score,dimension2_score,dimension3_score,dimension4_score,dimension5_score\n"
+        prompt += "- Only output numbers and commas, no text explanations\n"
+        prompt += "- Score range: 0-10 (can be decimal, e.g., 8.5)\n\n"
         
-        prompt += "示例输出：\n"
+        prompt += "Example output:\n"
         prompt += "8,7,9,6,8\n"
         prompt += "6,8,5,7,6\n\n"
         
-        prompt += "请开始评分（按顺序对每个标题输出一行评分）：\n"
+        prompt += "Please start scoring (output one line of scores for each headline in order):\n"
         
         return prompt
     
     def _parse_personalization_evaluation_response(self, response: str) -> List[List[float]]:
-        """解析LLM个性化评估响应，支持多种格式包括缺少首个分数的情况"""
+        """Parse LLM personalization evaluation response, supporting multiple formats including missing first score"""
         
         import re
         
-        self.logger.debug(f"解析个性化评估响应: {response[:200]}...")
+        self.logger.debug(f"Parse personalization evaluation response: {response[:200]}...")
         
         try:
             cleaned_text = response.strip()
             score_segments = []
             
-            # 方法1：按行分割
+            # Method 1: Split by lines
             lines = [line.strip() for line in cleaned_text.split('\n') if line.strip()]
             
             for line in lines:
                 if not line.strip():
                     continue
                 
-                # 跳过明显的说明文字
-                if any(keyword in line.lower() for keyword in ['标题', '评估', '维度', '分数', '输出', '示例', '作为', '请']):
+                # Skip obvious explanatory text
+                if any(keyword in line.lower() for keyword in ['title', 'evaluation', 'dimension', 'score', 'output', 'example', 'as', 'please']):
                     continue
                 
-                # 查找所有数字（包括小数）
+                # Find all numbers (including decimals)
                 numbers = re.findall(r'\d+(?:\.\d+)?', line)
                 
-                if len(numbers) >= 3:  # 至少3个数字才认为是有效的分数行
+                if len(numbers) >= 3:  # At least 3 numbers to consider as valid score line
                     try:
                         scores = [float(num) for num in numbers]
-                        # 限制在合理范围内
+                        # Limit to reasonable range
                         scores = [max(0.0, min(10.0, score)) for score in scores]
                         score_segments.append(scores)
-                        self.logger.debug(f"从行 '{line}' 解析出个性化分数: {scores}")
+                        self.logger.debug(f"Parsed personalization scores from line '{line}': {scores}")
                     except ValueError:
                         continue
             
-            # 方法2：处理连续的分数段（如果按行分割失败）
+            # Method 2: Process continuous score segments (if line splitting fails)
             if not score_segments:
-                # 按空格分割可能的分数段
+                # Split possible score segments by space
                 potential_segments = re.split(r'\s+', cleaned_text)
                 
                 for segment in potential_segments:
@@ -457,32 +457,32 @@ class Evaluator:
                     if not segment:
                         continue
                     
-                    # 处理以逗号开头的分数段（缺少第一个分数）
+                    # Handle segments starting with comma (missing first score)
                     if segment.startswith(','):
-                        # 添加默认分数5.0
+                        # Add default score 5.0
                         segment = '5.0' + segment
                     
-                    # 查找分数
+                    # Find scores
                     numbers = re.findall(r'\d+(?:\.\d+)?', segment)
                     
-                    if len(numbers) >= 3:  # 至少3个数字
+                    if len(numbers) >= 3:  # At least 3 numbers
                         try:
                             scores = [float(num) for num in numbers]
                             scores = [max(0.0, min(10.0, score)) for score in scores]
                             score_segments.append(scores)
-                            self.logger.debug(f"从段 '{segment}' 解析出个性化分数: {scores}")
+                            self.logger.debug(f"Parsed personalization scores from segment '{segment}': {scores}")
                         except ValueError:
                             continue
             
-            # 方法3：直接解析所有数字
+            # Method 3: Parse all numbers directly
             if not score_segments:
                 all_numbers = re.findall(r'\d+(?:\.\d+)?', cleaned_text)
                 
-                if len(all_numbers) >= 5:  # 至少5个数字
+                if len(all_numbers) >= 5:  # At least 5 numbers
                     try:
-                        # 将数字按5个一组分组
+                        # Group numbers into sets of 5
                         for i in range(0, len(all_numbers), 5):
-                            if i + 4 < len(all_numbers):  # 确保有完整的5个数字
+                            if i + 4 < len(all_numbers):  # Ensure complete set of 5 numbers
                                 group = all_numbers[i:i+5]
                                 scores = [float(num) for num in group]
                                 scores = [max(0.0, min(10.0, score)) for score in scores]
@@ -491,74 +491,74 @@ class Evaluator:
                         pass
             
             if not score_segments:
-                self.logger.warning("没有解析出任何个性化分数，返回默认值")
+                self.logger.warning("No personalization scores parsed, returning default values")
                 return [[5.0, 5.0, 5.0, 5.0, 5.0]]
             
-            # 确保每个分数段都有5个值
+            # Ensure each score segment has 5 values
             normalized_scores = []
             for scores in score_segments:
                 if len(scores) < 5:
-                    # 不足5个则用平均值补充
+                    # If less than 5, supplement with average value
                     avg_score = np.mean(scores) if scores else 5.0
                     scores.extend([avg_score] * (5 - len(scores)))
                 elif len(scores) > 5:
-                    # 超过5个则截取前5个
+                    # If more than 5, take first 5
                     scores = scores[:5]
                 
                 normalized_scores.append(scores)
             
-            self.logger.info(f"个性化评估解析完成，共{len(normalized_scores)}组分数")
+            self.logger.info(f"Personalization evaluation parsing complete, {len(normalized_scores)} score groups")
             return normalized_scores
             
         except Exception as e:
-            self.logger.error(f"解析个性化评估响应失败: {str(e)}")
+            self.logger.error(f"Failed to parse personalization evaluation response: {str(e)}")
             return [[5.0, 5.0, 5.0, 5.0, 5.0]]
     
     def llm_evaluate_quality(self, results: Dict[str, Any]) -> Dict[str, Any]:
-        """使用LLM评估标题质量（修复版本）"""
+        """Use LLM to evaluate title quality (fixed version)"""
         
-        self.logger.info("开始LLM质量评估...")
+        self.logger.info("Starting LLM quality evaluation...")
         
         generated_titles = results.get('generated_titles', [])
         reference_titles = results.get('reference_titles', [])
-        # 修复：统一使用news_contents字段名
+        # Fix: Unified use of news_contents field name
         news_bodies = results.get('news_contents', []) or results.get('news_bodies', [])
         
-        # 检查数据完整性，提供更详细的警告信息
+        # Check data integrity, provide more detailed warning information
         if not generated_titles:
-            self.logger.warning("缺少生成的标题数据")
+            self.logger.warning("Missing generated title data")
             return {
                 'llm_quality_score': 0.0,
                 'llm_quality_scores': []
             }
         
         if not reference_titles:
-            self.logger.warning("缺少参考标题数据")
+            self.logger.warning("Missing reference title data")
             return {
                 'llm_quality_score': 0.0,
                 'llm_quality_scores': []
             }
             
         if not news_bodies:
-            self.logger.warning("缺少新闻内容数据")
+            self.logger.warning("Missing news content data")
             return {
                 'llm_quality_score': 0.0,
                 'llm_quality_scores': []
             }
         
-        # 检查数据长度一致性
+        # Check data length consistency
         if len(generated_titles) != len(reference_titles) or len(generated_titles) != len(news_bodies):
-            self.logger.warning(f"数据长度不一致: 生成标题{len(generated_titles)}, 参考标题{len(reference_titles)}, 新闻内容{len(news_bodies)}")
-            # 截取到最短长度
+            self.logger.warning(f"Data length inconsistent: generated titles {len(generated_titles)}, reference titles {len(reference_titles)}, news content {len(news_bodies)}")
+            # Truncate to shortest length
             min_length = min(len(generated_titles), len(reference_titles), len(news_bodies))
             generated_titles = generated_titles[:min_length]
             reference_titles = reference_titles[:min_length]
             news_bodies = news_bodies[:min_length]
-            self.logger.info(f"已调整数据长度为: {min_length}")
+            self.logger.info(f"Adjusted data length to: {min_length}")
         
-        self.logger.info(f"LLM质量评估准备就绪，共{len(generated_titles)}个样本")
+        self.logger.info(f"LLM quality evaluation ready, {len(generated_titles)} samples total")
         
-        # 批量处理，每批5个
+        # Batch processing, 5 per batch
         batch_size = 5
         all_scores = []
         
@@ -567,7 +567,7 @@ class Evaluator:
             batch_reference = reference_titles[i:i+batch_size]
             batch_bodies = news_bodies[i:i+batch_size]
             
-            self.logger.info(f"正在评估批次 {i//batch_size + 1}，包含 {len(batch_generated)} 个标题")
+            self.logger.info(f"Evaluating batch {i//batch_size + 1}, containing {len(batch_generated)} titles")
             
             try:
                 batch_scores = self._llm_evaluate_batch_quality(
@@ -575,45 +575,45 @@ class Evaluator:
                 )
                 
                 if batch_scores:
-                    # batch_scores是二维列表，每个子列表包含5个维度分数
+                    # batch_scores is a 2D list, each sublist contains 5 dimension scores
                     all_scores.extend(batch_scores)
-                    self.logger.info(f"批次评估成功，获得 {len(batch_scores)} 个分数")
+                    self.logger.info(f"Batch evaluation successful, obtained {len(batch_scores)} scores")
                 else:
-                    # 如果批次评估失败，添加默认分数
+                    # If batch evaluation fails, add default scores
                     default_scores = [[0.5, 0.5, 0.5, 0.5, 0.5] for _ in range(len(batch_generated))]
                     all_scores.extend(default_scores)
-                    self.logger.warning(f"批次评估失败，使用默认分数")
+                    self.logger.warning(f"Batch evaluation failed, using default scores")
                     
             except Exception as e:
-                self.logger.error(f"批次评估出错: {e}")
-                # 添加默认分数
+                self.logger.error(f"Batch evaluation error: {e}")
+                # Add default scores
                 default_scores = [[0.5, 0.5, 0.5, 0.5, 0.5] for _ in range(len(batch_generated))]
                 all_scores.extend(default_scores)
         
         if not all_scores:
-            self.logger.warning("没有获得任何LLM质量评分，返回默认值")
+            self.logger.warning("No LLM quality scores obtained, returning default values")
             return {
                 'llm_quality_score': 0.0,
                 'llm_quality_scores': []
             }
         
-        # 计算每个标题的综合分数（五个维度的平均值）
+        # Calculate comprehensive score for each title (average of five dimensions)
         title_scores = []
         for score_list in all_scores:
             if isinstance(score_list, list) and len(score_list) >= 5:
-                # 取前5个维度分数的平均值
+                # Take average of first 5 dimension scores
                 avg_score = sum(score_list[:5]) / 5.0
-                # 确保在0-1范围内
+                # Ensure in 0-1 range
                 normalized_score = max(0.0, min(1.0, avg_score))
                 title_scores.append(normalized_score)
             else:
-                # 如果格式不对，使用默认分数
+                # If format is incorrect, use default score
                 title_scores.append(0.5)
         
-        # 计算总体平均分
+        # Calculate overall average score
         overall_score = sum(title_scores) / len(title_scores) if title_scores else 0.0
         
-        self.logger.info(f"LLM质量评估完成，平均分: {overall_score:.3f}")
+        self.logger.info(f"LLM quality evaluation complete, average score: {overall_score:.3f}")
         
         return {
             'llm_quality_score': overall_score,
@@ -623,37 +623,37 @@ class Evaluator:
     def _llm_evaluate_batch_quality(self, generated_titles: List[str], 
                                      reference_titles: List[str],
                                      news_bodies: List[str]) -> List[List[float]]:
-        """批次LLM质量评估"""
+        """Batch LLM quality evaluation"""
         
-        system_prompt = """你是一位专业的新闻标题质量评估专家。请对生成的新闻标题进行质量评分。
+        system_prompt = """You are a professional news headline quality evaluation expert. Please score the quality of generated news headlines.
 
-评估维度 (每个维度0-10分):
-1. 准确性: 标题是否准确反映新闻内容
-2. 吸引力: 标题是否能吸引读者注意
-3. 清晰度: 标题表达是否清晰易懂
-4. 简洁性: 标题长度和表达是否简洁
-5. 综合质量: 整体标题质量
+Evaluation dimensions (each dimension 0-10 points):
+1. Accuracy: Whether the headline accurately reflects the news content
+2. Attractiveness: Whether the headline can attract readers' attention
+3. Clarity: Whether the headline expression is clear and understandable
+4. Conciseness: Whether the headline length and expression are concise
+5. Overall quality: Overall headline quality
 
-严格按照要求输出：
-- 只输出数字和逗号，不要任何文字说明
-- 每行一个标题的评分，格式：分数1,分数2,分数3,分数4,分数5
-- 分数范围0-10，可以是小数（如8.5）
-- 按照标题顺序依次输出
-- 不要输出任何解释、分析或其他文字
+Strict output requirements:
+- Only output numbers and commas, no text explanations
+- One line per headline evaluation, format: score1,score2,score3,score4,score5
+- Score range 0-10, can be decimal (e.g., 8.5)
+- Output in order of headlines
+- Do not output any explanations, analysis, or other text
 
-示例输出：
+Example output:
 8.5,7.0,9.0,6.5,8.0
 6.0,8.5,5.5,7.0,6.5"""
         
-        user_prompt = "请对以下新闻标题进行质量评估：\n\n"
+        user_prompt = "Please evaluate the quality of the following news headlines:\n\n"
         
         for i, (gen, orig, content) in enumerate(zip(generated_titles, reference_titles, news_bodies)):
-            user_prompt += f"=== 标题 {i+1} ===\n"
-            user_prompt += f"原标题: {orig}\n"
-            user_prompt += f"生成标题: {gen}\n"
-            user_prompt += f"新闻内容: {content[:200]}...\n\n"
+            user_prompt += f"=== Title {i+1} ===\n"
+            user_prompt += f"Original title: {orig}\n"
+            user_prompt += f"Generated title: {gen}\n"
+            user_prompt += f"News content: {content[:200]}...\n\n"
         
-        user_prompt += "请按照标题顺序，每行输出一个标题的评分（5个维度分数，用逗号分隔）："
+        user_prompt += "Please output scores for each title in order (5 dimension scores separated by commas):"
         
         messages = [
             {"role": "system", "content": system_prompt},
@@ -664,68 +664,68 @@ class Evaluator:
             response = self.llm_client.chat_completion(messages, max_tokens=1000)
             if response:
                 batch_scores = self._parse_llm_evaluation_response(response, len(generated_titles))
-                if batch_scores:  # 确保解析成功
+                if batch_scores:  # Ensure parsing success
                     return batch_scores
                 else:
-                    # 解析失败，使用默认分数
+                    # Parsing failed, use default scores
                     return [[0.5, 0.5, 0.5, 0.5, 0.5]] * len(generated_titles)
             else:
-                # API调用失败，使用默认分数
+                # API call failed, use default scores
                 return [[0.5, 0.5, 0.5, 0.5, 0.5]] * len(generated_titles)
             
         except Exception as e:
-            self.logger.error(f"LLM质量评估失败: {e}")
-            # 返回默认分数矩阵
+            self.logger.error(f"LLM quality evaluation failed: {e}")
+            # Return default score matrix
             return [[0.5, 0.5, 0.5, 0.5, 0.5]] * len(generated_titles)
     
     def _parse_llm_evaluation_response(self, response_text: str, expected_count: int) -> List[List[float]]:
-        """解析LLM评估响应，支持多种格式，特别处理缺少首个分数的情况"""
+        """Parse LLM evaluation response, supporting multiple formats, especially handling missing first score"""
         
-        self.logger.debug(f"解析LLM响应: {response_text[:200]}...")
+        self.logger.debug(f"Parsing LLM response: {response_text[:200]}...")
         
         try:
-            # 清理响应文本
+            # Clean response text
             cleaned_text = response_text.strip()
             
-            # 处理缺少第一个分数的情况，如：",8.0,6.0,5.5,6.8 6.0,6.5,5.0,7.0,6.1"
-            # 使用正则表达式查找所有可能的分数段
+            # Handle case with missing first score, e.g.: ",8.0,6.0,5.5,6.8 6.0,6.5,5.0,7.0,6.1"
+            # Use regular expressions to find all possible score segments
             import re
             
-            # 查找所有可能的分数模式
-            # 包括：逗号分隔、空格分隔、以逗号开头的分数段
+            # Find all possible score patterns
+            # Including: comma-separated, space-separated, segments starting with comma
             score_segments = []
             
-            # 方法1：按行分割
+            # Method 1: Split by lines
             lines = [line.strip() for line in cleaned_text.split('\n') if line.strip()]
             
             for line in lines:
                 if not line.strip():
                     continue
                 
-                # 跳过明显的说明文字
-                if any(keyword in line.lower() for keyword in ['标题', '评估', '维度', '分数', '输出', '示例']):
+                # Skip obvious explanatory text
+                if any(keyword in line.lower() for keyword in ['title', 'evaluation', 'dimension', 'score', 'output', 'example']):
                     continue
                 
-                # 处理可能的分数行
-                # 查找所有数字（包括小数）
+                # Handle possible score lines
+                # Find all numbers (including decimals)
                 numbers = re.findall(r'\d+(?:\.\d+)?', line)
                 
-                if len(numbers) >= 3:  # 至少3个数字才认为是有效的分数行
+                if len(numbers) >= 3:  # At least 3 numbers to consider as valid score line
                     try:
                         scores = [float(num) for num in numbers]
-                        # 限制在合理范围内
+                        # Limit to reasonable range
                         scores = [max(0.0, min(10.0, score)) for score in scores]
                         score_segments.append(scores)
-                        self.logger.debug(f"从行 '{line}' 解析出分数: {scores}")
+                        self.logger.debug(f"Parsed scores from line '{line}': {scores}")
                     except ValueError:
                         continue
             
-            # 方法2：处理连续的分数段（如果按行分割失败）
+            # Method 2: Process continuous score segments (if line splitting fails)
             if not score_segments:
-                # 尝试查找连续的数字分数段
-                # 匹配类似 ",8.0,6.0,5.5,6.8 6.0,6.5,5.0,7.0,6.1" 的格式
+                # Try to find continuous numeric score segments
+                # Match formats like ",8.0,6.0,5.5,6.8 6.0,6.5,5.0,7.0,6.1"
                 
-                # 首先按空格或换行分割可能的分数段
+                # First split possible score segments by space or newline
                 potential_segments = re.split(r'\s+', cleaned_text)
                 
                 for segment in potential_segments:
@@ -733,33 +733,33 @@ class Evaluator:
                     if not segment:
                         continue
                     
-                    # 处理以逗号开头的分数段（缺少第一个分数）
+                    # Handle segments starting with comma (missing first score)
                     if segment.startswith(','):
-                        # 移除开头的逗号，添加默认分数
-                        segment = '5.0' + segment  # 添加默认分数5.0
+                        # Remove leading comma, add default score
+                        segment = '5.0' + segment  # Add default score 5.0
                     
-                    # 查找分数
+                    # Find scores
                     numbers = re.findall(r'\d+(?:\.\d+)?', segment)
                     
-                    if len(numbers) >= 3:  # 至少3个数字
+                    if len(numbers) >= 3:  # At least 3 numbers
                         try:
                             scores = [float(num) for num in numbers]
                             scores = [max(0.0, min(10.0, score)) for score in scores]
                             score_segments.append(scores)
-                            self.logger.debug(f"从段 '{segment}' 解析出分数: {scores}")
+                            self.logger.debug(f"Parsed scores from segment '{segment}': {scores}")
                         except ValueError:
                             continue
             
-            # 方法3：如果还是没有找到，尝试直接解析整个文本
+            # Method 3: If still not found, try parsing entire text directly
             if not score_segments:
-                # 查找所有数字
+                # Find all numbers
                 all_numbers = re.findall(r'\d+(?:\.\d+)?', cleaned_text)
                 
-                if len(all_numbers) >= 5:  # 至少5个数字
+                if len(all_numbers) >= 5:  # At least 5 numbers
                     try:
-                        # 将数字按5个一组分组
+                        # Group numbers into sets of 5
                         for i in range(0, len(all_numbers), 5):
-                            if i + 4 < len(all_numbers):  # 确保有完整的5个数字
+                            if i + 4 < len(all_numbers):  # Ensure complete set of 5 numbers
                                 group = all_numbers[i:i+5]
                                 scores = [float(num) for num in group]
                                 scores = [max(0.0, min(10.0, score)) for score in scores]
@@ -768,48 +768,48 @@ class Evaluator:
                         pass
             
             if not score_segments:
-                self.logger.warning("没有解析出任何分数，返回默认值")
+                self.logger.warning("No scores parsed, returning default values")
                 return [[5.0, 5.0, 5.0, 5.0, 5.0]] * expected_count
             
-            # 确保每个分数段都有5个值
+            # Ensure each score segment has 5 values
             normalized_scores = []
             for scores in score_segments:
                 if len(scores) < 5:
-                    # 不足5个则用平均值补充
+                    # If less than 5, supplement with average value
                     avg_score = np.mean(scores) if scores else 5.0
                     scores.extend([avg_score] * (5 - len(scores)))
                 elif len(scores) > 5:
-                    # 超过5个则截取前5个
+                    # If more than 5, take first 5
                     scores = scores[:5]
                 
-                # 转换为0-1范围
+                # Convert to 0-1 range
                 normalized = [score / 10.0 for score in scores]
                 normalized = [max(0.0, min(1.0, score)) for score in normalized]
                 normalized_scores.append(normalized)
             
-            # 调整数量以匹配期望值
+            # Adjust quantity to match expected value
             if len(normalized_scores) > expected_count:
                 normalized_scores = normalized_scores[:expected_count]
             elif len(normalized_scores) < expected_count:
-                # 不足则复制最后一组
+                # If insufficient, duplicate last group
                 last_scores = normalized_scores[-1] if normalized_scores else [0.5, 0.5, 0.5, 0.5, 0.5]
                 while len(normalized_scores) < expected_count:
                     normalized_scores.append(last_scores.copy())
             
-            self.logger.info(f"解析完成，共{len(normalized_scores)}组分数，每组{len(normalized_scores[0])}个值")
+            self.logger.info(f"Parsing complete, {len(normalized_scores)} score groups, {len(normalized_scores[0])} values per group")
             return normalized_scores
             
         except Exception as e:
-            self.logger.error(f"解析LLM评估响应失败: {str(e)}")
-            # 返回默认分数矩阵
+            self.logger.error(f"Failed to parse LLM evaluation response: {str(e)}")
+            # Return default score matrix
             return [[0.5, 0.5, 0.5, 0.5, 0.5]] * expected_count
     
     def comprehensive_evaluation(self, results: Dict[str, Any]) -> Dict[str, Any]:
-        """综合评估"""
+        """Comprehensive evaluation"""
         
         eval_results = {}
         
-        # 基础统计
+        # Basic statistics
         generated_titles = results.get('generated_titles', [])
         reference_titles = results.get('reference_titles', [])
         user_interests = results.get('user_interests', [])
@@ -820,41 +820,41 @@ class Evaluator:
         
         eval_results['basic_stats'] = self._calculate_basic_stats(generated_titles, reference_titles)
         
-        # ROUGE评估
+        # ROUGE evaluation
         if generated_titles and reference_titles:
             eval_results['rouge_scores'] = self.calculate_rouge_scores(generated_titles, reference_titles)
         
-        # 个性化评估（规则基础）- 暂时禁用，因为效果不佳
+        # Personalization evaluation (rule-based) - temporarily disabled due to poor performance
         # if generated_titles and user_interests and news_categories:
         #     eval_results['rule_based_personalization'] = self.evaluate_personalization(
         #         generated_titles, user_interests, news_categories, user_histories)
         
-        # 个性化评估（LLM）
+        # Personalization evaluation (LLM)
         if self.use_llm_evaluation and generated_titles and user_interests and news_categories:
-            self.logger.info("开始LLM个性化评估...")
+            self.logger.info("Starting LLM personalization evaluation...")
             eval_results['llm_personalization'] = self.llm_evaluate_personalization(
                 generated_titles, user_interests, news_categories, user_histories)
         
-        # 标题质量评估
+        # Title quality evaluation
         eval_results['title_quality'] = self._evaluate_title_quality(generated_titles)
         
-        # LLM质量评估
+        # LLM quality evaluation
         if self.use_llm_evaluation and generated_titles and original_titles and news_contents:
-            self.logger.info("开始LLM质量评估...")
+            self.logger.info("Starting LLM quality evaluation...")
             eval_results['llm_evaluation'] = self.llm_evaluate_quality(results)
         
-        # 计算综合评分
+        # Calculate comprehensive score
         comprehensive_scores = self._calculate_comprehensive_score(eval_results)
         eval_results['comprehensive_scores'] = comprehensive_scores
         eval_results['overall_score'] = comprehensive_scores.get('final_comprehensive_score', 0.0)
         
-        # 保存评估结果到实例属性
+        # Save evaluation results to instance attribute
         self.evaluation_results = eval_results
         
         return eval_results
     
     def _calculate_basic_stats(self, generated_titles: List[str], reference_titles: List[str]) -> Dict[str, Any]:
-        """计算基础统计信息"""
+        """Calculate basic statistics"""
         
         stats = {
             'total_samples': len(generated_titles),
@@ -878,7 +878,7 @@ class Evaluator:
         return stats
     
     def _evaluate_title_quality(self, generated_titles: List[str]) -> Dict[str, float]:
-        """评估标题质量（基于规则）"""
+        """Evaluate title quality (rule-based)"""
         
         if not generated_titles:
             return {}
@@ -891,17 +891,17 @@ class Evaluator:
         if not valid_titles:
             return {}
         
-        # 长度合理性评估
+        # Length reasonableness evaluation
         for title in valid_titles:
             length = len(title)
-            if 20 <= length <= 80:  # 理想长度范围
+            if 20 <= length <= 80:  # Ideal length range
                 length_scores.append(1.0)
-            elif 10 <= length <= 100:  # 可接受范围
+            elif 10 <= length <= 100:  # Acceptable range
                 length_scores.append(0.7)
             else:
                 length_scores.append(0.3)
         
-        # 多样性评估
+        # Diversity evaluation
         unique_titles = set(valid_titles)
         diversity_score = len(unique_titles) / len(valid_titles)
         
@@ -912,7 +912,7 @@ class Evaluator:
         }
     
     def _calculate_comprehensive_score(self, eval_results: Dict[str, Any]) -> Dict[str, float]:
-        """计算综合评分（分别计算ROUGE和LLM综合得分，并加权）"""
+        """Calculate comprehensive score (separately calculate ROUGE and LLM scores, then weight them)"""
         
         scores_breakdown = {
             'rouge_score': 0.0,
@@ -922,7 +922,7 @@ class Evaluator:
             'title_quality_score': 0.0
         }
         
-        # 1. ROUGE评分
+        # 1. ROUGE score
         rouge_scores = eval_results.get('rouge_scores', {})
         if rouge_scores:
             rouge_avg = np.mean([
@@ -932,19 +932,19 @@ class Evaluator:
             ])
             scores_breakdown['rouge_score'] = rouge_avg
         
-        # 2. LLM质量评分（已经是0-1范围）
+        # 2. LLM quality score (already in 0-1 range)
         llm_eval = eval_results.get('llm_evaluation', {})
         if llm_eval:
             llm_quality_score = llm_eval.get('llm_quality_score', 0)
-            scores_breakdown['llm_quality_score'] = llm_quality_score  # 已经是0-1范围，无需转换
+            scores_breakdown['llm_quality_score'] = llm_quality_score  # Already in 0-1 range, no conversion needed
         
-        # 3. LLM个性化评分
+        # 3. LLM personalization score
         llm_personalization = eval_results.get('llm_personalization', {})
         if llm_personalization:
             llm_personal_score = llm_personalization.get('llm_overall_personalization', 0)
             scores_breakdown['llm_personalization_score'] = llm_personal_score
         
-        # 4. 标题质量评分
+        # 4. Title quality score
         title_quality = eval_results.get('title_quality', {})
         if title_quality:
             quality_avg = np.mean([
@@ -953,8 +953,8 @@ class Evaluator:
             ])
             scores_breakdown['title_quality_score'] = quality_avg
         
-        # 计算加权综合分数（移除规则个性化评估后重新分配权重）
-        # ROUGE权重35%, LLM质量权重30%, LLM个性化权重25%, 标题质量权重10%
+        # Calculate weighted comprehensive score (redistributed weights after removing rule-based personalization evaluation)
+        # ROUGE weight 35%, LLM quality weight 30%, LLM personalization weight 25%, title quality weight 10%
         final_score = (
             scores_breakdown['rouge_score'] * 0.35 +
             scores_breakdown['llm_quality_score'] * 0.30 +
@@ -962,89 +962,89 @@ class Evaluator:
             scores_breakdown['title_quality_score'] * 0.10
         )
         
-        # 确保最终分数在0-1范围内
+        # Ensure final score is in 0-1 range
         final_score = min(max(final_score, 0.0), 1.0)
         scores_breakdown['final_comprehensive_score'] = final_score
         
         return scores_breakdown
     
     def generate_evaluation_report(self, eval_results: Dict[str, Any], save_path: Optional[str] = None) -> str:
-        """生成详细评估报告（统一权重体系）"""
+        """Generate detailed evaluation report (unified weight system)"""
         
         report = "=" * 80 + "\n"
-        report += "个性化新闻标题生成 - 详细评估报告\n"
+        report += "Personalized News Headline Generation - Detailed Evaluation Report\n"
         report += "=" * 80 + "\n\n"
         
-        # 基本统计
+        # Basic statistics
         basic_stats = eval_results.get('basic_stats', {})
-        report += "📊 基本统计信息:\n"
-        report += f"├─ 总样本数: {basic_stats.get('total_samples', 0)}\n"
-        report += f"├─ 有效样本数: {basic_stats.get('valid_samples', 0)}\n"
-        report += f"└─ 成功率: {basic_stats.get('success_rate', 0):.2%}\n\n"
+        report += "Basic Statistics:\n"
+        report += f"├─ Total samples: {basic_stats.get('total_samples', 0)}\n"
+        report += f"├─ Valid samples: {basic_stats.get('valid_samples', 0)}\n"
+        report += f"└─ Success rate: {basic_stats.get('success_rate', 0):.2%}\n\n"
         
-        # ROUGE评分（自动评估）
+        # ROUGE score (automatic evaluation)
         rouge_scores = eval_results.get('rouge_scores', {})
         if rouge_scores:
-            report += "📝 ROUGE评分 (自动评估 - 与参考标题的相似性):\n"
+            report += "ROUGE Scores (Automatic Evaluation - Similarity to Reference Titles):\n"
             report += f"├─ ROUGE-1 F-Score: {rouge_scores.get('rouge1_f', 0):.4f}\n"
             report += f"├─ ROUGE-2 F-Score: {rouge_scores.get('rouge2_f', 0):.4f}\n"
             report += f"└─ ROUGE-L F-Score: {rouge_scores.get('rougeL_f', 0):.4f}\n\n"
         
-        # 调试信息：LLM质量评估
+        # Debug info: LLM quality evaluation
         llm_eval = eval_results.get('llm_evaluation', {})
         if llm_eval:
-            report += "🤖 LLM质量评估详情:\n"
+            report += "LLM Quality Evaluation Details:\n"
             llm_quality_score = llm_eval.get('llm_quality_score', 0)
-            report += f"├─ 质量得分 (0-1): {llm_quality_score:.4f}\n"
-            report += f"├─ 等效10分制: {llm_quality_score * 10:.2f}/10\n"
-            report += f"└─ 评分标准差: {llm_eval.get('llm_quality_std', 0):.4f}\n\n"
+            report += f"├─ Quality score (0-1): {llm_quality_score:.4f}\n"
+            report += f"├─ Equivalent 10-point scale: {llm_quality_score * 10:.2f}/10\n"
+            report += f"└─ Score standard deviation: {llm_eval.get('llm_quality_std', 0):.4f}\n\n"
         else:
-            report += "⚠️ 警告: LLM质量评估未运行或失败\n\n"
+            report += "Warning: LLM quality evaluation not run or failed\n\n"
         
-        # LLM个性化评估
+        # LLM personalization evaluation
         llm_personalization = eval_results.get('llm_personalization', {})
         if llm_personalization:
-            report += "🎯 LLM个性化评估 (大模型评分 - 个性化程度):\n"
-            report += f"├─ 兴趣匹配度: {llm_personalization.get('llm_interest_match', 0):.4f}\n"
-            report += f"├─ 类别相关性: {llm_personalization.get('llm_category_relevance', 0):.4f}\n"
-            report += f"├─ 历史一致性: {llm_personalization.get('llm_history_consistency', 0):.4f}\n"
-            report += f"├─ 个性化创新: {llm_personalization.get('llm_personalization_innovation', 0):.4f}\n"
-            report += f"└─ LLM综合个性化: {llm_personalization.get('llm_overall_personalization', 0):.4f}\n\n"
+            report += "LLM Personalization Evaluation (Large Model Scoring - Personalization Degree):\n"
+            report += f"├─ Interest matching: {llm_personalization.get('llm_interest_match', 0):.4f}\n"
+            report += f"├─ Category relevance: {llm_personalization.get('llm_category_relevance', 0):.4f}\n"
+            report += f"├─ History consistency: {llm_personalization.get('llm_history_consistency', 0):.4f}\n"
+            report += f"├─ Personalization innovation: {llm_personalization.get('llm_personalization_innovation', 0):.4f}\n"
+            report += f"└─ LLM overall personalization: {llm_personalization.get('llm_overall_personalization', 0):.4f}\n\n"
         
-        # 标题质量（规则评估）
+        # Title quality (rule evaluation)
         title_quality = eval_results.get('title_quality', {})
         if title_quality:
-            report += "✨ 标题质量评估 (自动评估 - 基于规则):\n"
-            report += f"├─ 长度合理性: {title_quality.get('length_reasonableness', 0):.4f}\n"
-            report += f"├─ 标题多样性: {title_quality.get('title_diversity', 0):.4f}\n"
-            report += f"└─ 平均标题长度: {title_quality.get('average_length', 0):.1f} 字符\n\n"
+            report += "Title Quality Evaluation (Automatic Evaluation - Rule-based):\n"
+            report += f"├─ Length reasonableness: {title_quality.get('length_reasonableness', 0):.4f}\n"
+            report += f"├─ Title diversity: {title_quality.get('title_diversity', 0):.4f}\n"
+            report += f"└─ Average title length: {title_quality.get('average_length', 0):.1f} characters\n\n"
         
-        # 综合评分详细展示（统一权重体系）
+        # Comprehensive score detailed display (unified weight system)
         comprehensive_scores = eval_results.get('comprehensive_scores', {})
         if comprehensive_scores:
-            report += "🏆 综合评分详情 (加权计算):\n"
-            report += f"├─ ROUGE得分 (权重35%): {comprehensive_scores.get('rouge_score', 0):.4f}\n"
-            report += f"├─ LLM质量得分 (权重30%): {comprehensive_scores.get('llm_quality_score', 0):.4f}\n"
-            report += f"├─ LLM个性化得分 (权重25%): {comprehensive_scores.get('llm_personalization_score', 0):.4f}\n"
-            report += f"├─ 标题质量得分 (权重10%): {comprehensive_scores.get('title_quality_score', 0):.4f}\n"
-            report += f"└─ 📈 最终综合得分: {comprehensive_scores.get('final_comprehensive_score', 0):.4f}\n\n"
+            report += "Comprehensive Score Details (Weighted Calculation):\n"
+            report += f"├─ ROUGE score (weight 35%): {comprehensive_scores.get('rouge_score', 0):.4f}\n"
+            report += f"├─ LLM quality score (weight 30%): {comprehensive_scores.get('llm_quality_score', 0):.4f}\n"
+            report += f"├─ LLM personalization score (weight 25%): {comprehensive_scores.get('llm_personalization_score', 0):.4f}\n"
+            report += f"├─ Title quality score (weight 10%): {comprehensive_scores.get('title_quality_score', 0):.4f}\n"
+            report += f"└─ Final comprehensive score: {comprehensive_scores.get('final_comprehensive_score', 0):.4f}\n\n"
         else:
             overall_score = eval_results.get('overall_score', 0)
             if isinstance(overall_score, dict):
                 final_score = overall_score.get('final_comprehensive_score', 0)
             else:
                 final_score = overall_score
-            report += f"🏆 综合评分: {final_score:.4f}\n\n"
+            report += f"Comprehensive score: {final_score:.4f}\n\n"
         
-        # 评分说明
-        report += "📋 评分说明:\n"
-        report += "• ROUGE评分 (35%): 衡量生成标题与参考标题的词汇重叠度\n"
-        report += "• LLM质量评分 (30%): 大模型从准确性、吸引力、清晰度等维度评分\n"
-        report += "• LLM个性化评分 (25%): 大模型从个性化角度评估标题质量\n"
-        report += "• 标题质量评分 (10%): 基于长度合理性、多样性等规则评估\n"
-        report += "• 最终得分: 各项评分的加权平均（范围0-1）\n\n"
+        # Scoring explanation
+        report += "Scoring Explanation:\n"
+        report += "• ROUGE score (35%): Measures lexical overlap between generated titles and reference titles\n"
+        report += "• LLM quality score (30%): Large model evaluation from accuracy, attractiveness, clarity dimensions\n"
+        report += "• LLM personalization score (25%): Large model evaluation of title quality from personalization perspective\n"
+        report += "• Title quality score (10%): Rule-based evaluation based on length reasonableness, diversity, etc.\n"
+        report += "• Final score: Weighted average of all scores (range 0-1)\n\n"
         
-        # 评级
+        # Rating
         final_score = 0.0
         if comprehensive_scores:
             final_score = comprehensive_scores.get('final_comprehensive_score', 0)
@@ -1055,66 +1055,66 @@ class Evaluator:
             else:
                 final_score = overall_score
         
-        report += "🎯 说明: 本评估集成了ROUGE自动评估和LLM智能评估，全面反映标题生成质量\n"
+        report += "Note: This evaluation integrates ROUGE automatic evaluation and LLM intelligent evaluation, comprehensively reflecting title generation quality\n"
         
-        # 保存报告
+        # Save report
         if save_path:
             with open(save_path, 'w', encoding='utf-8') as f:
                 f.write(report)
-            self.logger.info(f"评估报告已保存到: {save_path}")
+            self.logger.info(f"Evaluation report saved to: {save_path}")
         
         return report
     
     def save_detailed_results(self, save_path: str):
-        """保存详细评估结果到文件"""
+        """Save detailed evaluation results to file"""
         
         if not hasattr(self, 'evaluation_results') or not self.evaluation_results:
-            self.logger.warning("没有评估结果可保存")
+            self.logger.warning("No evaluation results to save")
             return False
         
         try:
-            # 创建输出目录
+            # Create output directory
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             
-            # 准备保存数据
+            # Prepare save data
             save_data = {
                 'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 'evaluation_results': self.evaluation_results
             }
             
-            # 保存到JSON文件
+            # Save to JSON file
             with open(save_path, 'w', encoding='utf-8') as f:
                 json.dump(save_data, f, ensure_ascii=False, indent=2, default=str)
             
-            self.logger.info(f"详细评估结果已保存到: {save_path}")
+            self.logger.info(f"Detailed evaluation results saved to: {save_path}")
             return True
             
         except Exception as e:
-            self.logger.error(f"保存详细评估结果失败: {str(e)}")
+            self.logger.error(f"Failed to save detailed evaluation results: {str(e)}")
             return False
     
     def create_comparison_chart(self, save_path: Optional[str] = None):
-        """创建评估结果对比图表"""
+        """Create evaluation results comparison chart"""
         
         if not hasattr(self, 'evaluation_results') or not self.evaluation_results:
-            self.logger.warning("没有评估结果可用于生成图表")
+            self.logger.warning("No evaluation results available for chart generation")
             return False
         
         try:
             import matplotlib.pyplot as plt
             import numpy as np
             
-            # 设置中文字体
+            # Set font for Chinese characters
             plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans']
             plt.rcParams['axes.unicode_minus'] = False
             
             eval_results = self.evaluation_results
             
-            # 创建2x2的子图
+            # Create 2x2 subplots
             fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-            fig.suptitle('个性化新闻标题生成 - 评估结果', fontsize=16)
+            fig.suptitle('Personalized News Headline Generation - Evaluation Results', fontsize=16)
             
-            # 1. ROUGE分数
+            # 1. ROUGE scores
             rouge_scores = eval_results.get('rouge_scores', {})
             if rouge_scores:
                 rouge_metrics = ['ROUGE-1', 'ROUGE-2', 'ROUGE-L']
@@ -1131,48 +1131,48 @@ class Evaluator:
                 for i, v in enumerate(rouge_values):
                     axes[0, 0].text(i, v + 0.01, f'{v:.3f}', ha='center', va='bottom')
             
-            # 2. LLM评估（质量+个性化）
+            # 2. LLM evaluation (quality + personalization)
             llm_eval = eval_results.get('llm_evaluation', {})
             llm_personalization = eval_results.get('llm_personalization', {})
             if llm_eval or llm_personalization:
-                llm_labels = ['质量评分', '个性化评分']
+                llm_labels = ['Quality Score', 'Personalization Score']
                 llm_values = [
                     llm_eval.get('llm_quality_score', 0),
                     llm_personalization.get('llm_overall_personalization', 0)
                 ]
                 
                 axes[0, 1].bar(llm_labels, llm_values, color='lightcoral', alpha=0.8)
-                axes[0, 1].set_title('LLM评估')
+                axes[0, 1].set_title('LLM Evaluation')
                 axes[0, 1].set_ylabel('Score')
                 axes[0, 1].set_ylim(0, 1)
                 for i, v in enumerate(llm_values):
                     axes[0, 1].text(i, v + 0.01, f'{v:.3f}', ha='center', va='bottom')
             else:
-                axes[0, 1].text(0.5, 0.5, 'LLM评估数据\n不可用', ha='center', va='center', 
+                axes[0, 1].text(0.5, 0.5, 'LLM Evaluation Data\nNot Available', ha='center', va='center', 
                                transform=axes[0, 1].transAxes, fontsize=12)
-                axes[0, 1].set_title('LLM评估')
+                axes[0, 1].set_title('LLM Evaluation')
             
-            # 3. 标题质量
+            # 3. Title quality
             title_quality = eval_results.get('title_quality', {})
             if title_quality:
-                quality_labels = ['长度\n合理性', '标题\n多样性']
+                quality_labels = ['Length\nReasonableness', 'Title\nDiversity']
                 quality_values = [
                     title_quality.get('length_reasonableness', 0),
                     title_quality.get('title_diversity', 0)
                 ]
                 
                 axes[1, 0].bar(quality_labels, quality_values, color='lightgreen', alpha=0.8)
-                axes[1, 0].set_title('标题质量')
+                axes[1, 0].set_title('Title Quality')
                 axes[1, 0].set_ylabel('Score')
                 axes[1, 0].set_ylim(0, 1)
                 for i, v in enumerate(quality_values):
                     axes[1, 0].text(i, v + 0.01, f'{v:.3f}', ha='center', va='bottom')
             else:
-                axes[1, 0].text(0.5, 0.5, '标题质量数据\n不可用', ha='center', va='center', 
+                axes[1, 0].text(0.5, 0.5, 'Title Quality Data\nNot Available', ha='center', va='center', 
                                transform=axes[1, 0].transAxes, fontsize=12)
-                axes[1, 0].set_title('标题质量')
+                axes[1, 0].set_title('Title Quality')
             
-            # 4. 综合评分饼图（修复负值问题）
+            # 4. Comprehensive score pie chart (fixed negative value issue)
             comprehensive_scores = eval_results.get('comprehensive_scores', {})
             if comprehensive_scores:
                 overall_score = comprehensive_scores.get('final_comprehensive_score', 0)
@@ -1181,11 +1181,11 @@ class Evaluator:
                 if isinstance(overall_score, dict):
                     overall_score = overall_score.get('final_comprehensive_score', 0)
             
-            # 确保分数在0-1范围内
+            # Ensure score is in 0-1 range
             overall_score = max(0.0, min(1.0, overall_score))
             remaining_score = 1.0 - overall_score
             
-            # 确保两个值都不为负
+            # Ensure both values are not negative
             if overall_score < 0 or remaining_score < 0:
                 overall_score = 0.5
                 remaining_score = 0.5
@@ -1194,45 +1194,45 @@ class Evaluator:
             wedge_sizes = [overall_score, remaining_score]
             
             axes[1, 1].pie(wedge_sizes, 
-                           labels=['已达成', '待提升'], 
+                           labels=['Achieved', 'To Improve'], 
                            colors=colors,
                            autopct='%1.1f%%',
                            startangle=90)
-            axes[1, 1].set_title(f'综合评分: {overall_score:.3f}')
+            axes[1, 1].set_title(f'Comprehensive Score: {overall_score:.3f}')
             
             plt.tight_layout()
             
-            # 保存图表
+            # Save chart
             if save_path:
                 os.makedirs(os.path.dirname(save_path), exist_ok=True)
                 plt.savefig(save_path, dpi=300, bbox_inches='tight')
-                self.logger.info(f"评估图表已保存到: {save_path}")
+                self.logger.info(f"Evaluation chart saved to: {save_path}")
             
             plt.close()
             return True
             
         except ImportError as e:
-            self.logger.warning(f"无法生成图表，缺少matplotlib: {str(e)}")
+            self.logger.warning(f"Cannot generate chart, matplotlib missing: {str(e)}")
             return False
         except Exception as e:
-            self.logger.error(f"生成评估图表失败: {str(e)}")
+            self.logger.error(f"Failed to generate evaluation chart: {str(e)}")
             return False
 
 if __name__ == "__main__":
-    # 测试评估器
+    # Test evaluator
     evaluator = Evaluator()
     
-    # 模拟数据
+    # Mock data
     test_results = {
         'generated_titles': [
-            '科技巨头推出AI新品',
-            '智能手机性能大升级',
-            '新技术引领行业变革'
+            'Tech Giants Launch AI Products',
+            'Smartphone Performance Major Upgrade',
+            'New Technology Leads Industry Change'
         ],
         'reference_titles': [
-            '科技公司发布新产品',
-            '手机厂商推出旗舰机',
-            '技术创新推动发展'
+            'Tech Companies Release New Products',
+            'Phone Manufacturers Launch Flagship',
+            'Technology Innovation Drives Development'
         ],
         'user_interests': [
             {'primary_interest': 'Technology', 'categories': ['AI', 'Mobile']},
@@ -1242,12 +1242,12 @@ if __name__ == "__main__":
         'news_categories': ['Technology', 'Technology', 'Business']
     }
     
-    # 执行评估
+    # Execute evaluation
     results = evaluator.comprehensive_evaluation(test_results)
     
-    # 生成报告
+    # Generate report
     report = evaluator.generate_evaluation_report(results)
     print(report)
     
-    # 保存结果
+    # Save results
     evaluator.save_detailed_results('./test_evaluation_results.json') 

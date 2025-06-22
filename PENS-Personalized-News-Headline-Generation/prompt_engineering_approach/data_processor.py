@@ -1,5 +1,5 @@
 """
-数据预处理模块
+Data preprocessing module
 """
 
 import os
@@ -15,24 +15,24 @@ import json
 from config import DATA_PATHS, DATA_CONFIG, ensure_directories
 
 class DataProcessor:
-    """数据预处理器"""
+    """Data preprocessor"""
     
     def __init__(self):
         self.logger = self._setup_logger()
         ensure_directories()
         
-        # 加载原始数据路径
+        # Load original data path
         self.base_data_dir = DATA_PATHS['base_data_dir']
         self.output_dir = DATA_PATHS['processed_data_dir']
         
-        # 数据容器
+        # Data containers
         self.news_data = {}
         self.news_content = {}
         self.user_histories = {}
         self.user_interests = {}
         self.test_samples = []
         
-        # 初始化其他属性
+        # Initialize other attributes
         self.news_index = {}
         self.category_dict = {}
         self.word_dict = {}
@@ -40,7 +40,7 @@ class DataProcessor:
         self.test_samples_raw = []
         
     def _setup_logger(self):
-        """设置日志"""
+        """Setup logging"""
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -48,73 +48,73 @@ class DataProcessor:
         return logging.getLogger(__name__)
     
     def load_original_data(self):
-        """加载原始PENS数据"""
-        self.logger.info("开始加载原始PENS数据...")
+        """Load original PENS data"""
+        self.logger.info("Starting to load original PENS data...")
         
         try:
             data_dir = self.base_data_dir
             if not os.path.exists(data_dir):
-                self.logger.error(f"数据目录不存在: {data_dir}")
+                self.logger.error(f"Data directory does not exist: {data_dir}")
                 return False
             
-            # 加载基础数据字典
+            # Load basic data dictionary
             dict_path = os.path.join(data_dir, 'dict.pkl')
             if os.path.exists(dict_path):
                 with open(dict_path, 'rb') as f:
                     self.news_index, self.category_dict, self.word_dict = pickle.load(f)
-                self.logger.info("成功加载词典数据")
+                self.logger.info("Successfully loaded dictionary data")
             else:
-                self.logger.error(f"词典文件不存在: {dict_path}")
+                self.logger.error(f"Dictionary file does not exist: {dict_path}")
                 return False
             
-            # 加载测试用户数据
+            # Load test user data
             test_users_path = os.path.join(data_dir, 'TestUsers.pkl')
             if os.path.exists(test_users_path):
                 with open(test_users_path, 'rb') as f:
                     self.test_users = pickle.load(f)
-                self.logger.info(f"加载测试用户数据: {len(self.test_users)} 个用户")
+                self.logger.info(f"Loaded test user data: {len(self.test_users)} users")
             else:
-                self.logger.error(f"测试用户文件不存在: {test_users_path}")
+                self.logger.error(f"Test users file does not exist: {test_users_path}")
                 return False
             
-            # 加载测试样本
+            # Load test samples
             test_samples_path = os.path.join(data_dir, 'TestSamples.pkl')
             if os.path.exists(test_samples_path):
                 with open(test_samples_path, 'rb') as f:
                     self.test_samples_raw = pickle.load(f)
-                self.logger.info(f"加载测试样本: {len(self.test_samples_raw)} 个样本")
+                self.logger.info(f"Loaded test samples: {len(self.test_samples_raw)} samples")
             else:
-                self.logger.error(f"测试样本文件不存在: {test_samples_path}")
+                self.logger.error(f"Test samples file does not exist: {test_samples_path}")
                 return False
             
-            # 加载新闻数据
+            # Load news data
             news_path = os.path.join(data_dir, 'news.pkl')
             if os.path.exists(news_path):
                 with open(news_path, 'rb') as f:
                     self.news_content = pickle.load(f)
-                self.logger.info(f"加载新闻内容: {len(self.news_content)} 条新闻")
+                self.logger.info(f"Loaded news content: {len(self.news_content)} news articles")
             else:
-                self.logger.error(f"新闻数据文件不存在: {news_path}")
+                self.logger.error(f"News data file does not exist: {news_path}")
                 return False
             
             return True
             
         except Exception as e:
-            self.logger.error(f"加载原始数据失败: {str(e)}")
+            self.logger.error(f"Failed to load original data: {str(e)}")
             return False
     
     def load_processed_tsv_data(self):
-        """直接从TSV文件加载和处理数据"""
-        self.logger.info("从TSV文件加载数据...")
+        """Load and process data directly from TSV files"""
+        self.logger.info("Loading data from TSV files...")
         
         try:
-            # 加载新闻数据
+            # Load news data
             news_file = os.path.join('../data/PENS', 'news.tsv')
             if os.path.exists(news_file):
                 news_df = pd.read_csv(news_file, sep='\t')
                 news_df.fillna(value=" ", inplace=True)
                 
-                # 构建新闻数据字典
+                # Build news data dictionary
                 for i, row in news_df.iterrows():
                     doc_id, vert, _, title, snippet = row[:5]
                     self.news_content[doc_id] = {
@@ -123,38 +123,38 @@ class DataProcessor:
                         'body': snippet.lower() if isinstance(snippet, str) else ""
                     }
                 
-                self.logger.info(f"从TSV加载新闻数据: {len(self.news_content)} 条")
+                self.logger.info(f"Loaded news data from TSV: {len(self.news_content)} articles")
             
-            # 加载测试数据
+            # Load test data
             test_file = os.path.join('../data/PENS', 'personalized_test.tsv')
             if os.path.exists(test_file):
                 test_df = pd.read_csv(test_file, sep='\t')
                 
                 for i, row in test_df.iterrows():
-                    user_id = i  # 使用行索引作为用户ID
+                    user_id = i  # Use row index as user ID
                     click_history = row['clicknewsID'].split(',') if pd.notna(row['clicknewsID']) else []
                     pos_news = row['posnewID'].split(',') if pd.notna(row['posnewID']) else []
                     rewrite_titles = row['rewrite_titles'].split(';;') if pd.notna(row['rewrite_titles']) else []
                     
-                    # 保存用户历史
+                    # Save user history
                     self.test_users.append(click_history)
                     
-                    # 创建测试样本
+                    # Create test samples
                     for news_id, rewrite_title in zip(pos_news, rewrite_titles):
                         if news_id.strip() and rewrite_title.strip():
                             self.test_samples_raw.append([user_id, news_id, rewrite_title.lower()])
                 
-                self.logger.info(f"从TSV加载测试数据: {len(self.test_users)} 个用户, {len(self.test_samples_raw)} 个样本")
+                self.logger.info(f"Loaded test data from TSV: {len(self.test_users)} users, {len(self.test_samples_raw)} samples")
             
             return True
             
         except Exception as e:
-            self.logger.error(f"从TSV加载数据失败: {str(e)}")
+            self.logger.error(f"Failed to load data from TSV: {str(e)}")
             return False
     
     def extract_user_histories_from_tsv(self):
-        """从TSV数据提取用户历史"""
-        self.logger.info("从TSV数据提取用户历史...")
+        """Extract user histories from TSV data"""
+        self.logger.info("Extracting user histories from TSV data...")
         
         for user_idx, click_history in enumerate(self.test_users[:DATA_CONFIG['test_samples']]):
             clicked_news_titles = []
@@ -169,14 +169,14 @@ class DataProcessor:
             if clicked_news_titles:
                 self.user_histories[user_idx] = clicked_news_titles
             else:
-                self.user_histories[user_idx] = ["无历史记录"]
+                self.user_histories[user_idx] = ["No history available"]
         
-        self.logger.info(f"提取用户历史完成: {len(self.user_histories)} 个用户")
+        self.logger.info(f"User history extraction completed: {len(self.user_histories)} users")
         return self.user_histories
     
     def extract_user_interests_from_tsv(self):
-        """从TSV数据提取用户兴趣"""
-        self.logger.info("从TSV数据提取用户兴趣...")
+        """Extract user interests from TSV data"""
+        self.logger.info("Extracting user interests from TSV data...")
         
         for user_idx, click_history in enumerate(self.test_users[:DATA_CONFIG['test_samples']]):
             categories = []
@@ -201,12 +201,12 @@ class DataProcessor:
                     'primary_interest': 'news'
                 }
         
-        self.logger.info(f"提取用户兴趣完成: {len(self.user_interests)} 个用户")
+        self.logger.info(f"User interest extraction completed: {len(self.user_interests)} users")
         return self.user_interests
     
     def prepare_test_samples_from_tsv(self):
-        """从TSV数据准备测试样本"""
-        self.logger.info("从TSV数据准备测试样本...")
+        """Prepare test samples from TSV data"""
+        self.logger.info("Preparing test samples from TSV data...")
         
         test_samples = []
         
@@ -224,40 +224,40 @@ class DataProcessor:
                         'news_body': news_info['body'][:DATA_CONFIG['max_news_content_length']],
                         'category': news_info['category'],
                         'reference_title': rewrite_title,
-                        'user_history': self.user_histories.get(user_idx, ["无历史记录"]),
+                        'user_history': self.user_histories.get(user_idx, ["No history available"]),
                         'user_interests': self.user_interests.get(user_idx, {'categories': ['news'], 'primary_interest': 'news'})
                     }
                     
-                    # 过滤空标题或过短的内容
+                    # Filter empty titles or too short content
                     if test_sample['original_title'] and len(test_sample['original_title'].strip()) > 5:
                         test_samples.append(test_sample)
                 
             except Exception as e:
-                self.logger.warning(f"处理样本 {i} 时出错: {str(e)}")
+                self.logger.warning(f"Error processing sample {i}: {str(e)}")
                 continue
         
         self.test_samples = test_samples
-        self.logger.info(f"准备测试样本完成: {len(test_samples)} 个样本")
+        self.logger.info(f"Test sample preparation completed: {len(test_samples)} samples")
         return test_samples
     
     def save_processed_data(self):
-        """保存预处理后的数据"""
-        self.logger.info("开始保存预处理数据...")
+        """Save preprocessed data"""
+        self.logger.info("Starting to save preprocessed data...")
         
         try:
-            # 保存用户历史
+            # Save user histories
             with open(os.path.join(self.output_dir, 'user_histories.json'), 'w', encoding='utf-8') as f:
                 json.dump(self.user_histories, f, ensure_ascii=False, indent=2)
             
-            # 保存用户兴趣
+            # Save user interests
             with open(os.path.join(self.output_dir, 'user_interests.json'), 'w', encoding='utf-8') as f:
                 json.dump(self.user_interests, f, ensure_ascii=False, indent=2)
             
-            # 保存测试样本
+            # Save test samples
             with open(os.path.join(self.output_dir, 'test_samples.json'), 'w', encoding='utf-8') as f:
                 json.dump(self.test_samples, f, ensure_ascii=False, indent=2)
             
-            # 保存统计信息
+            # Save statistics
             stats = {
                 'total_users': len(self.user_histories),
                 'total_samples': len(self.test_samples),
@@ -268,15 +268,15 @@ class DataProcessor:
             with open(os.path.join(self.output_dir, 'data_stats.json'), 'w', encoding='utf-8') as f:
                 json.dump(stats, f, ensure_ascii=False, indent=2)
             
-            self.logger.info("数据保存完成")
+            self.logger.info("Data saving completed")
             return True
             
         except Exception as e:
-            self.logger.error(f"保存数据失败: {str(e)}")
+            self.logger.error(f"Failed to save data: {str(e)}")
             return False
     
     def load_processed_data(self):
-        """加载已处理的数据"""
+        """Load processed data"""
         try:
             with open(os.path.join(self.output_dir, 'test_samples.json'), 'r', encoding='utf-8') as f:
                 self.test_samples = json.load(f)
@@ -287,63 +287,63 @@ class DataProcessor:
             with open(os.path.join(self.output_dir, 'user_interests.json'), 'r', encoding='utf-8') as f:
                 self.user_interests = json.load(f)
                 
-            self.logger.info("成功加载已处理的数据")
+            self.logger.info("Successfully loaded processed data")
             return True
         except Exception as e:
-            self.logger.error(f"加载已处理数据失败: {str(e)}")
+            self.logger.error(f"Failed to load processed data: {str(e)}")
             return False
     
     def process_all_from_tsv(self):
-        """从TSV文件的完整处理流程"""
-        self.logger.info("开始TSV数据处理流程...")
+        """Complete processing pipeline from TSV files"""
+        self.logger.info("Starting TSV data processing pipeline...")
         
-        # 1. 加载TSV数据
+        # 1. Load TSV data
         if not self.load_processed_tsv_data():
             return False
         
-        # 2. 提取用户历史
+        # 2. Extract user histories
         self.extract_user_histories_from_tsv()
         
-        # 3. 提取用户兴趣
+        # 3. Extract user interests
         self.extract_user_interests_from_tsv()
         
-        # 4. 准备测试样本
+        # 4. Prepare test samples
         self.prepare_test_samples_from_tsv()
         
-        # 5. 保存处理后的数据
+        # 5. Save processed data
         self.save_processed_data()
         
-        self.logger.info("TSV数据处理流程完成")
+        self.logger.info("TSV data processing pipeline completed")
         return True
     
     def process_all_from_pkl(self):
-        """从PKL文件的完整处理流程"""
-        self.logger.info("开始PKL数据处理流程...")
+        """Complete processing pipeline from PKL files"""
+        self.logger.info("Starting PKL data processing pipeline...")
         
-        # 1. 加载原始数据
+        # 1. Load original data
         if not self.load_original_data():
             return False
         
-        # 2. 提取用户历史
-        # ... 这里可以调用原来的方法，但需要改进
+        # 2. Extract user histories
+        # ... Here we can call original methods, but need improvements
         
         return True
 
     def get_test_samples(self, limit: int = None) -> List[Dict[str, Any]]:
-        """获取测试样本
+        """Get test samples
         
         Args:
-            limit: 限制返回的样本数量，如果为None则返回所有样本
+            limit: Limit the number of returned samples, if None return all samples
             
         Returns:
-            测试样本列表
+            List of test samples
         """
-        # 如果测试样本为空，尝试加载已处理的数据
+        # If test samples are empty, try to load processed data
         if not hasattr(self, 'test_samples') or not self.test_samples:
             if not self.load_processed_data():
-                # 如果加载失败，尝试重新处理
+                # If loading fails, try to reprocess
                 if not self.process_all_from_tsv():
-                    self.logger.error("无法获取测试样本：数据加载和处理都失败")
+                    self.logger.error("Unable to get test samples: both data loading and processing failed")
                     return []
         
         if limit is None:
@@ -354,12 +354,12 @@ class DataProcessor:
 if __name__ == "__main__":
     processor = DataProcessor()
     
-    # 优先尝试TSV处理方式
+    # Try TSV processing method first
     success = processor.process_all_from_tsv()
     
     if success:
-        print("数据预处理完成!")
-        print(f"处理了 {len(processor.test_samples)} 个测试样本")
-        print(f"涉及 {len(processor.user_histories)} 个用户")
+        print("Data preprocessing completed!")
+        print(f"Processed {len(processor.test_samples)} test samples")
+        print(f"Involving {len(processor.user_histories)} users")
     else:
-        print("数据预处理失败，请检查数据文件和路径配置") 
+        print("Data preprocessing failed, please check data files and path configuration") 

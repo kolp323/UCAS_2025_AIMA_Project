@@ -1,0 +1,74 @@
+{
+  "timestamp": "2025-06-22 20:26:27",
+  "evaluation_results": {
+    "basic_stats": {
+      "total_samples": 20,
+      "valid_samples": 20,
+      "success_rate": 1.0,
+      "avg_generated_length": 81.4,
+      "avg_reference_length": 51.55
+    },
+    "rouge_scores": {
+      "rouge1_f": 0.33153793720525443,
+      "rouge1_p": 0.29964452214452214,
+      "rouge1_r": 0.4064636752136752,
+      "rouge2_f": 0.11950073146667572,
+      "rouge2_p": 0.10924242424242425,
+      "rouge2_r": 0.1383531746031746,
+      "rougeL_f": 0.2689876880646163,
+      "rougeL_p": 0.2420804195804196,
+      "rougeL_r": 0.33296474358974354
+    },
+    "llm_personalization": {
+      "llm_interest_match": 0.675,
+      "llm_interest_match_std": 0.27726341266023546,
+      "llm_category_relevance": 0.5375,
+      "llm_category_relevance_std": 0.19803724397193573,
+      "llm_history_consistency": 0.575,
+      "llm_history_consistency_std": 0.10897247358851685,
+      "llm_personalization_innovation": 0.6,
+      "llm_personalization_innovation_std": 0.17320508075688773,
+      "llm_overall_personalization": 0.5,
+      "llm_overall_personalization_std": 0.17320508075688773
+    },
+    "title_quality": {
+      "length_reasonableness": 0.89,
+      "title_diversity": 1.0,
+      "average_length": 81.4
+    },
+    "llm_evaluation": {
+      "llm_quality_score": 0.834,
+      "llm_quality_scores": [
+        0.8140000000000001,
+        0.8140000000000001,
+        0.8140000000000001,
+        0.8140000000000001,
+        0.8140000000000001,
+        0.8099999999999999,
+        0.8099999999999999,
+        0.8099999999999999,
+        0.8099999999999999,
+        0.8099999999999999,
+        0.8460000000000001,
+        0.8460000000000001,
+        0.8460000000000001,
+        0.8460000000000001,
+        0.8460000000000001,
+        0.866,
+        0.866,
+        0.866,
+        0.866,
+        0.866
+      ]
+    },
+    "comprehensive_scores": {
+      "rouge_score": 0.24000878557884883,
+      "llm_quality_score": 0.834,
+      "llm_personalization_score": 0.5,
+      "rule_personalization_score": 0.0,
+      "title_quality_score": 0.9450000000000001,
+      "final_comprehensive_score": 0.5537030749525971
+    },
+    "overall_score": 0.5537030749525971
+  }
+}

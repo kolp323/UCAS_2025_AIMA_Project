@@ -1,10 +1,10 @@
 """
-配置文件 - 基于提示词工程的个性化新闻标题生成
+Configuration file - Personalized News Headline Generation Based on Prompt Engineering
 """
 
 import os
 
-# 导入API配置
+# Import API configuration
 try:
     from api_config import (
         API_BASE_CONFIG, 
@@ -16,7 +16,7 @@ try:
         is_reasoning_model as _is_reasoning_model
     )
 except ImportError:
-    print("警告: 未找到api_config.py文件，请从api_config_template.py复制并配置您的API密钥")
+    print("Warning: api_config.py file not found, please copy from api_config_template.py and configure your API key")
     from api_config_template import (
         API_BASE_CONFIG, 
         MODELS_CONFIG, 
@@ -27,39 +27,39 @@ except ImportError:
         is_reasoning_model as _is_reasoning_model
     )
 
-# API配置（向后兼容）
+# API configuration (backward compatibility)
 API_CONFIG = {
     'base_url': API_BASE_CONFIG['base_url'],
     'api_key': API_BASE_CONFIG['api_key'],
-    'model': 'deepseek-chat-v3-0324',  # 当前使用的模型
-    'max_tokens': 50000,  # 总token限制
-    'max_tokens_per_request': 3000,  # 单次请求token限制
+    'model': 'deepseek-chat-v3-0324',  # Currently used model
+    'max_tokens': 50000,  # Total token limit
+    'max_tokens_per_request': 3000,  # Single request token limit
     'max_retries': API_BASE_CONFIG['max_retries'],
     'timeout': API_BASE_CONFIG['timeout'],
     'temperature': 0.7
 }
 
-# 数据路径配置
+# Data path configuration
 DATA_PATHS = {
-    'base_data_dir': '../data2',  # 预处理后的PENS数据目录（包含pkl文件）
-    'raw_data_dir': '../data',  # 原始PENS数据目录
+    'base_data_dir': '../data2',  # Preprocessed PENS data directory (containing pkl files)
+    'raw_data_dir': '../data',  # Original PENS data directory
     'output_dir': './outputs',
     'processed_data_dir': './outputs/processed_data',
     'generated_titles_dir': './outputs/generated_titles',
     'evaluation_results_dir': './outputs/evaluation_results'
 }
 
-# 数据处理配置
+# Data processing configuration
 DATA_CONFIG = {
-    'max_user_history': 20,  # 最大用户历史记录数
-    'max_news_content_length': 500,  # 新闻内容最大长度
-    'min_title_length': 5,  # 最小标题长度
-    'max_title_length': 50,  # 最大标题长度
-    'batch_size': 10,  # 批处理大小
-    'test_samples': 200  # 测试样本数量
+    'max_user_history': 20,  # Maximum user history records
+    'max_news_content_length': 500,  # Maximum news content length
+    'min_title_length': 5,  # Minimum title length
+    'max_title_length': 50,  # Maximum title length
+    'batch_size': 10,  # Batch processing size
+    'test_samples': 200  # Number of test samples
 }
 
-# 提示词配置
+# Prompt configuration
 PROMPT_CONFIG = {
     'system_prompts': {
         'reasoning_model': """You are an AI expert at creating personalized news headlines. Your task is to analyze user preferences and generate engaging, personalized English headlines that match their interests.
@@ -162,22 +162,22 @@ Return an engaging 8-20 word English headline."""
     }
 }
 
-# 评估配置
+# Evaluation configuration
 EVALUATION_CONFIG = {
     'rouge_metrics': ['rouge-1', 'rouge-2', 'rouge-l'],
     'use_stemmer': True,
-    'alpha': 0.5,  # F-score的权重参数
-    'evaluation_samples': 100  # 评估样本数量
+    'alpha': 0.5,  # Weight parameter for F-score
+    'evaluation_samples': 100  # Number of evaluation samples
 }
 
-# 日志配置
+# Logging configuration
 LOGGING_CONFIG = {
     'level': 'INFO',
     'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     'file': './outputs/logs/prompt_engineering.log'
 }
 
-# 模型配置
+# Model configuration
 MODEL_CONFIG = {
     'reasoning_models': [
         'deepseek-r1-0528',
@@ -193,27 +193,27 @@ MODEL_CONFIG = {
     ]
 }
 
-# 评估模型配置 - 修改为非推理模型
-EVALUATION_MODEL = 'deepseek-chat-v3-0324'  # 改为聊天模型，避免推理模型的复杂解析
+# Evaluation model configuration - modified to non-reasoning model
+EVALUATION_MODEL = 'deepseek-chat-v3-0324'  # Changed to chat model to avoid complex parsing of reasoning models
 
 def is_reasoning_model(model_name: str) -> bool:
-    """判断是否为推理模型"""
+    """Check if it is a reasoning model"""
     return model_name in MODEL_CONFIG['reasoning_models']
 
 def get_optimal_max_tokens(model_name: str) -> int:
-    """根据模型类型获取最优的max_tokens设置"""
+    """Get optimal max_tokens setting based on model type"""
     config = get_model_config(model_name)
     return config.get('max_tokens', 200)
 
 def get_system_prompt(model_name: str) -> str:
-    """根据模型类型获取系统提示词"""
+    """Get system prompt based on model type"""
     if is_reasoning_model(model_name):
         return PROMPT_CONFIG['system_prompts']['reasoning_model']
     else:
         return PROMPT_CONFIG['system_prompts']['chat_model']
 
 def get_user_prompt(model_name: str, style: str = 'focused') -> str:
-    """根据模型类型和风格获取用户提示词"""
+    """Get user prompt based on model type and style"""
     if is_reasoning_model(model_name):
         return PROMPT_CONFIG['user_prompts']['reasoning_model'].get(style, 
                PROMPT_CONFIG['user_prompts']['reasoning_model']['focused'])
@@ -222,17 +222,17 @@ def get_user_prompt(model_name: str, style: str = 'focused') -> str:
                PROMPT_CONFIG['user_prompts']['chat_model']['focused'])
 
 def set_current_model(model_name: str):
-    """设置当前使用的模型"""
+    """Set the currently used model"""
     if model_name in get_available_models():
         API_CONFIG['model'] = model_name
         return True
     else:
-        print(f"模型 {model_name} 不在可用模型列表中: {get_available_models()}")
+        print(f"Model {model_name} is not in the available model list: {get_available_models()}")
         return False
 
-# 创建必要的目录
+# Create necessary directories
 def ensure_directories():
-    """确保所有必要的目录存在"""
+    """Ensure all necessary directories exist"""
     dirs_to_create = [
         DATA_PATHS['output_dir'],
         DATA_PATHS['processed_data_dir'],
@@ -246,4 +246,4 @@ def ensure_directories():
 
 if __name__ == "__main__":
     ensure_directories()
-    print("配置加载完成，目录结构已创建") 
+    print("Configuration loaded successfully, directory structure created") 

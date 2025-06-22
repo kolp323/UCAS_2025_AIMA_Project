@@ -1,0 +1,858 @@
+{
+  "generated_titles": [
+    "Trump's Pollution Rule Faces High-Stakes Legal Battle Over Climate Rollbacks",
+    "Retro Homes The One Design Trend Making Your House Feel Instantly Dated",
+    "MLB Scolds Verlander Over Juiced Ball Comments Ahead of All-Star Game",
+    "O.J. Simpson Joins Twitter, Vows to 'Get Even' in Viral Comeback Post",
+    "Year-Old Coco Gauff Stuns Venus Williams in Historic Wimbledon Upset",
+    "Top U.S. States Ranked by Literacy Ahead of International Literacy Day",
+    "Eagles Face Offseason Challenges Wentz Assessment, Front Office Shake-Up & CB Depth Chart Concerns",
+    "\"Smart Money Moves for Retirees 27 Essential Finance Tips Now\" (Note Kept it finance-focused based on user's interest in news/video/finance and recent article engagement.)",
+    "Universal Orlando Express Pass Is It Worth the Cost for Time-Strapped Visitors?",
+    "Veteran CBS 6 Anchor Angie Miles Bids Farewell After Stellar Broadcasting Career",
+    "Apple's Iconic Designer Jony Ive Departs After 27 Years, Leaving Legacy of Minimalist Tech",
+    "Secret Ship Tricks How Sanctioned Nations Dodge US Trade Bans",
+    "West Baltimore Public Housing Residents Face 5th Day Without Water Amid Broken Valve Crisis",
+    "NASA's Rocket Launches Still Thrill 50 Years After Apollo 11's Historic Mission",
+    "New York Liberty's Turnaround Young Talent & Tina Charles Spark Winning Streak",
+    "Unlikely Allies Loggers and Environmentalists Unite to Tackle Wildfires Together",
+    "Russell Wilson Stuns Mom With Mother's Day House Surprise",
+    "Kentucky Missing Kids Case Seeks Class Action, Urges Public Help in Ongoing Search",
+    "Trump Unveils Middle East Peace Plan Focused on Economics, Sidesteps Palestinian Statehood",
+    "Carolina Hurricanes Secure Rising Star Nedeljkovic with Two-Year Deal"
+  ],
+  "reference_titles": [
+    "legal battle looms over trump epa's rule change of obama's clean power plan rule",
+    "wise choices for stylish updating of old homes",
+    "verlander may be reconsidering his stance on mlbs juicing balls",
+    "infamous o.j. simpson launching official twitter account",
+    "15 year old cori gauff beats venus williams at wimbledon",
+    "still much room for improvement in many us states",
+    "eagles still have plenty of news despite nfl dead zone",
+    "smart moves retirees should make",
+    "is the express pass in universal orlando worth the cost?",
+    "cbs news anchor angie miles says goodbye",
+    "meet the legendary john ives, apple design chief",
+    "trade sanctions: how sanctioned countries still trade",
+    "plumbing problems plague pie homes residents",
+    "return to the moon and beyond",
+    "wnba's new york liberty is back on track",
+    "loggers vs. environmentalists: bitter enemies find common ground on the forest floor.",
+    "russell wilson treats his mom with a new house for mother's day",
+    "open cases of missing kentucky kids",
+    "unveiling of trump's middle east peace plan",
+    "alex nefeljkovic has re-signed with the carolina hurricanes"
+  ],
+  "user_interests": [
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    },
+    {
+      "categories": [
+        "news",
+        "video",
+        "finance"
+      ],
+      "primary_interest": "news"
+    }
+  ],
+  "news_categories": [
+    "news",
+    "lifestyle",
+    "sports",
+    "tv",
+    "sports",
+    "news",
+    "sports",
+    "finance",
+    "travel",
+    "tv",
+    "news",
+    "news",
+    "weather",
+    "news",
+    "sports",
+    "lifestyle",
+    "sports",
+    "sports",
+    "news",
+    "sports"
+  ],
+  "generation_metadata": [
+    {
+      "sample_idx": 0,
+      "prompt_style": "enhanced",
+      "response_raw": "Trump's Pollution Rule Faces High-Stakes Legal Battle Over Climate Rollbacks",
+      "title_options": [],
+      "selected_title": "Trump's Pollution Rule Faces High-Stakes Legal Battle Over Climate Rollbacks"
+    },
+    {
+      "sample_idx": 1,
+      "prompt_style": "enhanced",
+      "response_raw": "Retro Homes: The One Design Trend Making Your House Feel Instantly Dated",
+      "title_options": [],
+      "selected_title": "Retro Homes The One Design Trend Making Your House Feel Instantly Dated"
+    },
+    {
+      "sample_idx": 2,
+      "prompt_style": "enhanced",
+      "response_raw": "MLB Scolds Verlander Over Juiced Ball Comments Ahead of All-Star Game",
+      "title_options": [],
+      "selected_title": "MLB Scolds Verlander Over Juiced Ball Comments Ahead of All-Star Game"
+    },
+    {
+      "sample_idx": 3,
+      "prompt_style": "enhanced",
+      "response_raw": "O.J. Simpson Joins Twitter, Vows to 'Get Even' in Viral Comeback Post",
+      "title_options": [],
+      "selected_title": "O.J. Simpson Joins Twitter, Vows to 'Get Even' in Viral Comeback Post"
+    },
+    {
+      "sample_idx": 4,
+      "prompt_style": "enhanced",
+      "response_raw": "Year-Old Coco Gauff Stuns Venus Williams in Historic Wimbledon Upset",
+      "title_options": [],
+      "selected_title": "Year-Old Coco Gauff Stuns Venus Williams in Historic Wimbledon Upset"
+    },
+    {
+      "sample_idx": 5,
+      "prompt_style": "enhanced",
+      "response_raw": "Top U.S. States Ranked by Literacy Ahead of International Literacy Day",
+      "title_options": [],
+      "selected_title": "Top U.S. States Ranked by Literacy Ahead of International Literacy Day"
+    },
+    {
+      "sample_idx": 6,
+      "prompt_style": "enhanced",
+      "response_raw": "Eagles Face Offseason Challenges: Wentz Assessment, Front Office Shake-Up & CB Depth Chart Concerns",
+      "title_options": [],
+      "selected_title": "Eagles Face Offseason Challenges Wentz Assessment, Front Office Shake-Up & CB Depth Chart Concerns"
+    },
+    {
+      "sample_idx": 7,
+      "prompt_style": "enhanced",
+      "response_raw": "\"Smart Money Moves for Retirees: 27 Essential Finance Tips Now\" (Note: Kept it finance-focused based on user's interest in news/video/finance and recent article engagement.)",
+      "title_options": [],
+      "selected_title": "\"Smart Money Moves for Retirees 27 Essential Finance Tips Now\" (Note Kept it finance-focused based on user's interest in news/video/finance and recent article engagement.)"
+    },
+    {
+      "sample_idx": 8,
+      "prompt_style": "enhanced",
+      "response_raw": "Universal Orlando Express Pass: Is It Worth the Cost for Time-Strapped Visitors?",
+      "title_options": [],
+      "selected_title": "Universal Orlando Express Pass Is It Worth the Cost for Time-Strapped Visitors?"
+    },
+    {
+      "sample_idx": 9,
+      "prompt_style": "enhanced",
+      "response_raw": "Veteran CBS 6 Anchor Angie Miles Bids Farewell After Stellar Broadcasting Career",
+      "title_options": [],
+      "selected_title": "Veteran CBS 6 Anchor Angie Miles Bids Farewell After Stellar Broadcasting Career"
+    },
+    {
+      "sample_idx": 10,
+      "prompt_style": "enhanced",
+      "response_raw": "Apple's Iconic Designer Jony Ive Departs After 27 Years, Leaving Legacy of Minimalist Tech",
+      "title_options": [],
+      "selected_title": "Apple's Iconic Designer Jony Ive Departs After 27 Years, Leaving Legacy of Minimalist Tech"
+    },
+    {
+      "sample_idx": 11,
+      "prompt_style": "enhanced",
+      "response_raw": "Secret Ship Tricks: How Sanctioned Nations Dodge US Trade Bans",
+      "title_options": [],
+      "selected_title": "Secret Ship Tricks How Sanctioned Nations Dodge US Trade Bans"
+    },
+    {
+      "sample_idx": 12,
+      "prompt_style": "enhanced",
+      "response_raw": "West Baltimore Public Housing Residents Face 5th Day Without Water Amid Broken Valve Crisis",
+      "title_options": [],
+      "selected_title": "West Baltimore Public Housing Residents Face 5th Day Without Water Amid Broken Valve Crisis"
+    },
+    {
+      "sample_idx": 13,
+      "prompt_style": "enhanced",
+      "response_raw": "NASA's Rocket Launches Still Thrill 50 Years After Apollo 11's Historic Mission",
+      "title_options": [],
+      "selected_title": "NASA's Rocket Launches Still Thrill 50 Years After Apollo 11's Historic Mission"
+    },
+    {
+      "sample_idx": 14,
+      "prompt_style": "enhanced",
+      "response_raw": "New York Liberty's Turnaround: Young Talent & Tina Charles Spark Winning Streak",
+      "title_options": [],
+      "selected_title": "New York Liberty's Turnaround Young Talent & Tina Charles Spark Winning Streak"
+    },
+    {
+      "sample_idx": 15,
+      "prompt_style": "enhanced",
+      "response_raw": "Unlikely Allies: Loggers and Environmentalists Unite to Tackle Wildfires Together",
+      "title_options": [],
+      "selected_title": "Unlikely Allies Loggers and Environmentalists Unite to Tackle Wildfires Together"
+    },
+    {
+      "sample_idx": 16,
+      "prompt_style": "enhanced",
+      "response_raw": "Russell Wilson Stuns Mom With Mother's Day House Surprise",
+      "title_options": [],
+      "selected_title": "Russell Wilson Stuns Mom With Mother's Day House Surprise"
+    },
+    {
+      "sample_idx": 17,
+      "prompt_style": "enhanced",
+      "response_raw": "Kentucky Missing Kids Case Seeks Class Action, Urges Public Help in Ongoing Search",
+      "title_options": [],
+      "selected_title": "Kentucky Missing Kids Case Seeks Class Action, Urges Public Help in Ongoing Search"
+    },
+    {
+      "sample_idx": 18,
+      "prompt_style": "enhanced",
+      "response_raw": "Trump Unveils Middle East Peace Plan Focused on Economics, Sidesteps Palestinian Statehood",
+      "title_options": [],
+      "selected_title": "Trump Unveils Middle East Peace Plan Focused on Economics, Sidesteps Palestinian Statehood"
+    },
+    {
+      "sample_idx": 19,
+      "prompt_style": "enhanced",
+      "response_raw": "Carolina Hurricanes Secure Rising Star Nedeljkovic with Two-Year Deal",
+      "title_options": [],
+      "selected_title": "Carolina Hurricanes Secure Rising Star Nedeljkovic with Two-Year Deal"
+    }
+  ],
+  "original_titles": [
+    "high-stakes legal fight looms over trump pollution rule",
+    "the one thing that immediately makes your house look dated",
+    "justin verlander got 'chewed out' by mlb before all-star game",
+    "oj simpson on twitter: 'i got a little gettin' even to do'",
+    "gauff, just 15, shocks 5-time champ venus, 39, at wimbledon",
+    "most and least literate states",
+    "carson wentz assessment, eagles front office changes, figuring out the cornerback depth chart, and more",
+    "27 smart moves retirees should make with their money now",
+    "universal orlando: is an express pass worth the cost? | commentary",
+    "angie miles: 'it's been absolutely wonderful being here both times'",
+    "the glamorous life of jony ive, the legendary apple designer who's now leaving to strike out on his own",
+    "going dark and fake voyages: the tricks used to dodge trade sanctions",
+    "'it's terrible': poe homes public housing complex in west baltimore still without water after monday main break",
+    "50 years after apollo 11, nasa's rocket launches are as exciting as ever",
+    "it's time to start paying attention to the new york liberty",
+    "'we have a lot of shared values': loggers, environmentalists team up in fight against wildfires",
+    "wilson, ciara surprise qb's mom with new house for mother's day",
+    "missing kids in kentucky: ongoing cases",
+    "trump's middle east peace plan explained",
+    "alex nedeljkovic re-signs with hurricanes on two-year, two-way deal"
+  ],
+  "news_contents": [
+    "democratic state attorney generals and environmental groups are gearing up for what is expected to be a precedent-setting legal battle with the trump administration over its rollback of an obama-era power plant pollution rule. they argue the new trump rule won't do enough to stop climate change and that the administration is ignoring the clean air act's (caa) requirement that the federal government manage pollution that is harmful to human health. there are high stakes. a loss on their side coul",
+    "we love old houses. their architectural styles tell stories of the past, and their classic character feels familiar and welcoming. a house with a history behind it is a major draw for many potential buyers. some aspects of an old home, however, can feel outdated rather than retro . stepping through the front door of a 1970s rancher can often feel like a time warp. while keeping the home's original character is important, it's necessary to make some updates so you don't feel stuck in another deca",
+    "justin verlander made headlines earlier in the week when he openly accused major league baseball of lying about juicing balls, and he had to have known league officials would not appreciate the remarks. what he may not have known, however, was that he would be scolded over them. as jayson stark of the athletic put it, verlander got called into the principal's office on monday afternoon. the veteran right-hander received a stern talking to from joe torre, jim leyland and at least one other mlb of",
+    "los angeles   o.j. simpson launched a twitter account with a video post in which the former football star said he's got a \"little gettin' even to do.\" simpson confirmed the new account to the associated press on saturday, saying in a phone interview while on a las vegas golf course that it \"will be a lot of fun.\" \"i've got some things to straighten out,\" he said. he did not elaborate before he said he had to go and ended the call. simpson has generally kept a low profile since his release from p",
+    "wimbledon, england (ap)   coco gauff grew up admiring the williams sisters. picked up a tennis racket as a little girl because of them. and on monday at wimbledon, still just 15, gauff beat one of them. gauff, the youngest competitor to qualify at the all england club in the professional era, showed the poise and power of a much older, much more experienced player, pulling off a 6-4, 6-4 victory in the first round over venus williams, who at 39... united states' cori \"coco\" gauff reacts after be",
+    "on september 8, 2018, countries around the world will celebrate international literacy day. on september 8, 2018, countries around the world will celebrate international literacy day. the event shines a spotlight on global literacy needs and focuses on the strategies and resources needed to spread literacy around the world. while the event will primarily highlight literacy needs in developing countries, there is still much room for improvement in many parts of the united states. reading proficie",
+    "bgn radio episode 59! the nfl dead zone has officially begun. it's going to be a slow grind until the first philadelphia eagles training camp practice begins on july 25. the good news is that we still have some post-minicamp coverage and front office news to talk about. so that's exactly what john stolnis and i discussed on the latest bgn radio podcast episode. show topics include: sifting through the eagles' front office announcements: andy weidl replacing joe douglas , howie roseman getting th",
+    "learn how best to spend and save your money in retirement. smart moves retirees should make with their money now retiring isn't the end of your financial journey. though you might be done planning for your golden years, you'll still have to understand how to save and spend money in retirement. this isn't always easy, as you're likely living on a fixed income . so, it can be frustrating that there is no standard playbook dictating where retirees should put their money. however, a lack of one-size",
+    "how much is your time worth? how about when you know you could be stuck in line for hours under the intense florida sun, waiting your turn to hop aboard the latest, greatest theme park ride? on the first day of summer, thousands of thrill-seekers from around the globe descended upon universal orlando resort's parks with hopes and dreams for a fun-filled vacation at the forefront of their minds. but during crowded summer months, those visitors can find themselves spending the majority of their ti",
+    "richmond, va.   veteran broadcaster and cbs 6 news anchor angie miles is leaving the south's first television station for a second time. angie, who rejoined the station in november of 2015 after a 15 year hiatus to anchor the 6 and 11 p.m. saturday newscasts, signed off at 11 p.m. with some surprise guests. \"it's been absolutely wonderful being here both times,\" angie said. \"it was 20 years ago, pretty much to the day, that i said goodbye the first time. and i'm joined by some folks who said goo",
+    "here's all you need to know about apple's jony ive, from where he was born, to his massive car collection. apple design chief jony ive is leaving the company , the iphone maker announced thursday. ive has worked at apple for 27 years, and has had a lasting impression on the company's trademark minimalist design ethos. here's all you need to know about jony ive, from where he was born, to his massive car collection. visit business insider's homepage for more stories . after the late steve jobs, n",
+    "(bloomberg) -- as the u.s. looks to enforce sanctions aimed at halting trade with states such as iran and venezuela, there's increased scrutiny on the tricks being used to keep commodities flowing to and from blacklisted countries. ships vanishing from tracking screens, clandestine transfers on the high seas and fake destinations are among some of the tactics used to hide the business from authorities, according to analysts who track flows around the world. these maneuvers have helped iran conti",
+    "after five days without regular water access, residents of the poe homes public housing complex in west baltimore received a letter friday advising them to stay with relatives, as the problems might persist over the weekend. the latest problem is another broken valve discovered after other repairs had been made. for many residents, such as 31-year-old calvin smith, going elsewhere simply isn't possible. \"it's just so nonchalant,\" he said. \"that's how i feel that they feel: it ain't my problem.\" ",
+    "it's almost 50 years to the day since the apollo 11 mission launched atop a saturn v rocket from cape canaveral air force station in florida. that launch, on july 16, 1969, represented a triumph of human achievement and engineering, a frighteningly dangerous foray into the unknown and a hugely patriotic way for america to stick it to the soviets. i've only ever experienced apollo through grainy archival footage and crackling audio recordings. but now, half a century later, nasa is planning to go",
+    "would you look at what's going on in westchester? after finally breaking their 17-game losing streak that dated back to last july(!!) the new york liberty seem to have their mojo back. in fairness, this team has far too much talent, and young talent at that, to be mired in the doldrums for too long. tina charles is one of the best frontcourt players in the league, kia nurse and asia durr make up a fearsome offensive backcourt and amanda zahui b is really announcing herself to the world with her ",
+    "logging has deep roots in the forests just outside the darrington community. for generations, loggers and environmentalists have waged bitter battles over these lands. they've been about as friendly as a chainsaw and tree trunk. now, the darrington collaborative is forging an unlikely alliance. it was born out of the 2014 oso landslide. it was designed to maximize economic and natural resources and help the surrounding community recover. steve skaglund, who runs 3 rivers cutting, said logging is",
+    "russell wilson sure knows how to give a good gift. the seattle seahawks quarterback gave his mom the ultimate mother's day present sunday when he surprised her with her very own house. wilson, 30, shocked his mother tammy when he casually handed her the keys to her new place, prompting cries first of disbelief, and then eventually, joy. \"all these years you have never asked me for anything… only thing you ever wanted is for me to love. well thanks for loving us the way you do,\" he captioned the ",
+    "the case mentions the organization's issues and is looking for class action status so it can represent all children in dcs, including foster kids. alice jefferson alice jefferson, age now: 64, missing: 07/04/1975. missing from fort campbell, ky. anyone having information should contact: us army criminal investigation division (kentucky) 1-270-798-7113. alyx girtz alyx girtz, age now: 17, missing: 10/02/2018. missing from owensboro, ky. anyone having information should contact: owensboro police d",
+    "more than two years after president donald trump first proposed a plan to revive the israeli-palestinian peace process, its first phase will be formally unveiled on tuesday at an economic workshop in bahrain. the white house's economic prospectus makes no mention of palestinian statehood. and little has so far been revealed about the later political stage of the plan, which will have to address this and other issues that have defied decades of efforts by previous peacemakers. more than two years",
+    "the carolina hurricanes may not have new deals in place with petr mrazek and curtis mcelhinney , but that doesn't mean they're without goaltending altogether. alex nedeljkovic , fresh off a calder cup and ahl most outstanding goaltender award, has re-signed with the team for the next two seasons. the deal is a two-way contract in 2019-20 worth $725k at the nhl level, and a one-way contract in 2020-21 that carries a $750k salary. gm don waddell released a statement on the young goaltender: alex h"
+  ],
+  "user_histories": [
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ],
+    [
+      "nike faces backlash after pulling 'betsy ross flag' sneakers",
+      "costco is selling a giant donut covered in pink icing, sprinkles and m&m's",
+      "top stock reports for berkshire hathaway, salesforce & danaher",
+      "over half of plastic surgery clients in china are under 28",
+      "ferrari set to drop protest, seek review of canada penalty",
+      "top berkeley news: ice agent shows up at city college; cyclist seriously injured in crash; more",
+      "facebook's new cryptocurrency libra has a 'completely generic' logo, says a designer who's worked with burger king and dunkin'",
+      "children using parents' make-up and cologne means they end up in er every two hours in the u.s.",
+      "trump raises 2020 stakes by elevating north korea, china on agenda",
+      "sanders: i'll absolutely call trump a racist to his face",
+      "'toy story 4' teaser shakes things up with comedy duo keegan-michael key and jordan peele",
+      "governor to sign recreational marijuana bill",
+      "hilary duff shares story behind her romantic proposal from matthew koma",
+      "in addition to mail, baltimore postman delivered marijuana on his route",
+      "guns n' roses announces first charlotte concert date in nearly 30 years",
+      "quick-thinking us dad catches 11-month old son after he falls from chest of drawers",
+      "detroit arts in national spotlight as acting nea chair visits the city",
+      "livonia man fatally hit by vehicle on wyoming highway",
+      "trump hijacks july 4 celebration",
+      "the company behind 'fortnite' told uk lawmakers that the game isn't addictive, after prince harry said it was 'irresponsible' and should be banned"
+    ]
+  ]
+}

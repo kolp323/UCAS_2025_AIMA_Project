@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-提示词生成器模块 - 支持不同模型类型的自适应提示词生成
+Prompt generator module - Supports adaptive prompt generation for different model types
 """
 
 import logging
@@ -11,14 +11,14 @@ from config import (PROMPT_CONFIG, API_CONFIG,
                    get_system_prompt, get_user_prompt, is_reasoning_model)
 
 class PromptGenerator:
-    """提示词生成器 - 自适应支持推理模型和聊天模型"""
+    """Prompt generator - Adaptively supports reasoning models and chat models"""
     
     def __init__(self):
-        """初始化提示词生成器"""
+        """Initialize prompt generator"""
         self.current_model = API_CONFIG['model']
         self.is_reasoning_model = is_reasoning_model(self.current_model)
         
-        # 设置日志
+        # Setup logging
         self.logger = logging.getLogger('prompt_generator')
         if not self.logger.handlers:
             handler = logging.StreamHandler()
@@ -27,18 +27,18 @@ class PromptGenerator:
             self.logger.addHandler(handler)
             self.logger.setLevel(logging.INFO)
         
-        self.logger.info(f"初始化提示词生成器: {self.current_model} ({'推理模型' if self.is_reasoning_model else '聊天模型'})")
+        self.logger.info(f"Initialize prompt generator: {self.current_model} ({'reasoning model' if self.is_reasoning_model else 'chat model'})")
     
     def get_system_prompt(self, style: str = 'default') -> str:
-        """获取系统提示词"""
+        """Get system prompt"""
         return get_system_prompt(self.current_model)
     
     def get_user_prompt(self, style: str = 'focused') -> str:
-        """获取用户提示词模板"""
+        """Get user prompt template"""
         return get_user_prompt(self.current_model, style)
     
     def get_batch_prompt_template(self) -> str:
-        """获取批量处理提示词模板"""
+        """Get batch processing prompt template"""
         if self.is_reasoning_model:
             return """Create personalized English headlines for {batch_size} news articles based on user interests.
 
@@ -67,11 +67,11 @@ News 3: [Headline]"""
     
     def generate_single_prompt(self, sample: Dict[str, Any], style: str = 'focused') -> tuple[str, str]:
         """
-        为单个样本生成提示词
+        Generate prompt for single sample
         
         Args:
-            sample: 样本数据
-            style: 提示词风格 ('focused', 'enhanced', 'creative')
+            sample: Sample data
+            style: Prompt style ('focused', 'enhanced', 'creative')
         
         Returns:
             tuple: (system_prompt, user_prompt)
@@ -79,19 +79,19 @@ News 3: [Headline]"""
         system_prompt = self.get_system_prompt()
         user_prompt_template = self.get_user_prompt(style)
         
-        # 构建用户历史字符串
+        # Build user history string
         history_str = "\n".join([f"- {title}" for title in sample['user_history'][:10]])
         
-        # 构建兴趣标签字符串  
+        # Build interest tags string
         interests = sample['user_interests']
-        interest_str = f"主要兴趣: {interests['primary_interest']}, 相关类别: {', '.join(interests['categories'])}"
+        interest_str = f"Primary interest: {interests['primary_interest']}, Related categories: {', '.join(interests['categories'])}"
         
-        # 格式化用户提示词
+        # Format user prompt
         user_prompt = user_prompt_template.format(
             user_history=history_str,
             user_interests=interest_str,
             original_title=sample['original_title'],
-            news_content=sample['news_body'][:400],  # 限制新闻内容长度
+            news_content=sample['news_body'][:400],  # Limit news content length
             news_category=sample['category']
         )
         
@@ -99,10 +99,10 @@ News 3: [Headline]"""
     
     def generate_batch_prompt(self, samples: List[Dict[str, Any]]) -> tuple[str, str]:
         """
-        为批量样本生成提示词
+        Generate prompt for batch samples
         
         Args:
-            samples: 样本数据列表
+            samples: List of sample data
         
         Returns:
             tuple: (system_prompt, user_prompt)
@@ -110,14 +110,14 @@ News 3: [Headline]"""
         system_prompt = self.get_system_prompt()
         batch_template = self.get_batch_prompt_template()
         
-        # 构建批量内容
+        # Build batch content
         batch_content_parts = []
         for i, sample in enumerate(samples, 1):
-            # 简化用户兴趣描述
+            # Simplify user interest description
             interests = sample['user_interests']
             interest_summary = f"{interests['primary_interest']} ({', '.join(interests['categories'][:3])})"
             
-            # 简化历史记录
+            # Simplify history records
             history_summary = "; ".join(sample['user_history'][:5])
             
             content_part = f"""News {i}:
@@ -138,12 +138,12 @@ News 3: [Headline]"""
         return system_prompt, user_prompt
     
     def get_available_styles(self) -> List[str]:
-        """获取可用的提示词风格列表"""
+        """Get list of available prompt styles"""
         model_type = 'reasoning_model' if self.is_reasoning_model else 'chat_model'
         return list(PROMPT_CONFIG['user_prompts'][model_type].keys())
     
     def update_model(self, model_name: str):
-        """更新当前使用的模型"""
+        """Update currently used model"""
         self.current_model = model_name
         self.is_reasoning_model = is_reasoning_model(model_name)
-        self.logger.info(f"更新模型: {model_name} ({'推理模型' if self.is_reasoning_model else '聊天模型'})") 
+        self.logger.info(f"Update model: {model_name} ({'reasoning model' if self.is_reasoning_model else 'chat model'})") 
