@@ -1,210 +1,210 @@
-# 基于提示词工程的个性化新闻标题生成系统
+# Prompt Engineering-based Personalized News Headline Generation System
 
-## 🚀 项目概述
+## Project Overview
 
-本项目采用提示词工程的技术路线，通过调用大语言模型API实现个性化新闻标题生成，作为PENS项目的替代实现方案。本系统支持多模型比较、改进的个性化评估和LLM质量评估。
+This project adopts a prompt engineering technical approach, implementing personalized news headline generation through calling large language model APIs, serving as an alternative implementation scheme for the PENS project. This system supports multi-model comparison, improved personalization evaluation, and LLM quality assessment.
 
-## 🎯 主要特性
+## Main Features
 
-- **🔐 安全的API配置管理**：敏感信息独立存储，安全可控
-- **🔧 多模型支持**：支持动态模型切换和性能对比
-- **📊 增强版个性化评估**：4维度科学评估个性化效果
-- **🤖 LLM质量评估**：使用推理模型客观评估标题质量
-- **🎯 综合评分体系**：多指标加权评估，全面反映系统性能
+- **Secure API Configuration Management**: Sensitive information stored independently, secure and controllable
+- **Multi-model Support**: Supports dynamic model switching and performance comparison
+- **Enhanced Personalization Evaluation**: Scientific evaluation of personalization effects across 4 dimensions
+- **LLM Quality Assessment**: Uses reasoning models to objectively evaluate headline quality
+- **Comprehensive Scoring System**: Multi-metric weighted evaluation, comprehensively reflecting system performance
 
-## 📁 技术架构
+## Technical Architecture
 
-### 核心模块
+### Core Modules
 
-1. **API配置模块**
-   - `api_config.py` - 敏感信息配置（已加入.gitignore）
-   - `api_config_template.py` - 配置模板
-   - 支持多模型配置和动态切换
+1. **API Configuration Module**
+   - `api_config.py` - Sensitive information configuration (added to .gitignore)
+   - `api_config_template.py` - Configuration template
+   - Supports multi-model configuration and dynamic switching
 
-2. **数据处理模块** (`data_processor.py`)
-   - 从原有PENS数据中提取用户历史点击序列
-   - 分析用户兴趣标签和历史偏好
-   - 智能数据预处理和清洗
+2. **Data Processing Module** (`data_processor.py`)
+   - Extracts user historical click sequences from existing PENS data
+   - Analyzes user interest tags and historical preferences
+   - Intelligent data preprocessing and cleaning
 
-3. **提示词工程模块** (`prompt_generator.py`)
-   - 自适应提示词设计
-   - 支持推理模型和聊天模型不同的提示词策略
-   - 优化token使用，控制API调用成本
+3. **Prompt Engineering Module** (`prompt_generator.py`)
+   - Adaptive prompt design
+   - Supports different prompt strategies for reasoning models and chat models
+   - Optimizes token usage, controls API call costs
 
-4. **LLM客户端模块** (`llm_client.py`)
-   - 支持多模型动态切换
-   - 智能内容提取和错误处理
-   - API配额管理和速率限制
+4. **LLM Client Module** (`llm_client.py`)
+   - Supports multi-model dynamic switching
+   - Intelligent content extraction and error handling
+   - API quota management and rate limiting
 
-5. **评估模块** (`evaluator.py`)
-       - 4维度个性化评估
-   - LLM质量评估功能
-   - 科学的综合评分体系
+5. **Evaluation Module** (`evaluator.py`)
+   - 4-dimensional personalization evaluation
+   - LLM quality evaluation functionality
+   - Scientific comprehensive scoring system
 
-6. **主程序模块** (`main.py`)
-   - 完整的生成流程
-   - 批量处理和结果管理
+6. **Main Program Module** (`main.py`)
+   - Complete generation process
+   - Batch processing and result management
 
-## 📂 文件结构
+## File Structure
 
 ```
 prompt_engineering_approach/
-├── README.md                           # 项目说明
-├── requirements.txt                    # 依赖包
-├── api_config_template.py              # API配置模板
-├── config.py                          # 主配置文件
-├── data_processor.py                  # 数据处理器
-├── prompt_generator.py                # 提示词生成器
-├── llm_client.py                      # LLM API客户端
-├── evaluator.py                       # 评估器
-├── main.py                            # 主程序
-├── prompt_engineering_pipeline.ipynb  # 完整流程演示
-└── outputs/                           # 输出目录
-    ├── processed_data/                # 预处理数据
-    ├── generated_titles/              # 生成的标题
-    └── evaluation_results/            # 评估结果
+├── README.md                           # Project description
+├── requirements.txt                    # Dependencies
+├── api_config_template.py              # API configuration template
+├── config.py                          # Main configuration file
+├── data_processor.py                  # Data processor
+├── prompt_generator.py                # Prompt generator
+├── llm_client.py                      # LLM API client
+├── evaluator.py                       # Evaluator
+├── main.py                            # Main program
+├── prompt_engineering_pipeline.ipynb  # Complete process demonstration
+└── outputs/                           # Output directory
+    ├── processed_data/                # Preprocessed data
+    ├── generated_titles/              # Generated headlines
+    └── evaluation_results/            # Evaluation results
 ```
 
-## 🚀 快速开始
+## Quick Start
 
-### 1. 环境准备
+### 1. Environment Setup
 
 ```bash
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. 配置API密钥
+### 2. Configure API Keys
 
 ```bash
-# 复制配置模板
+# Copy configuration template
 cp api_config_template.py api_config.py
 
-# 编辑配置文件，将YOUR_API_KEY_HERE替换为您的实际API密钥
+# Edit configuration file, replace YOUR_API_KEY_HERE with your actual API key
 ```
 
-### 3. 运行系统
+### 3. Run System
 
-**方式1：使用Jupyter Notebook（推荐）**
+**Method 1: Using Jupyter Notebook (Recommended)**
 ```bash
 jupyter notebook prompt_engineering_pipeline.ipynb
 ```
 
-**方式2：使用Python脚本**
+**Method 2: Using Python Scripts**
 ```bash
-# 运行主程序
+# Run main program
 python main.py
 ```
 
-## 🔧 支持的模型
+## Supported Models
 
-当前支持以下模型（可在`api_config.py`中配置）：
+Currently supports the following models (configurable in `api_config.py`):
 
-- **deepseek-chat-v3-0324** (默认) - 聊天模型，适合标题生成
-- **deepseek-r1-0528** - 推理模型，用于质量评估
+- **deepseek-chat-v3-0324** (default) - Chat model, suitable for headline generation
+- **deepseek-r1-0528** - Reasoning model, used for quality evaluation
 
-用户可以根据需要在配置文件中添加更多模型。
+Users can add more models in the configuration file as needed.
 
-## 📊 评估体系
+## Evaluation System
 
-### 增强版个性化评估
+### Enhanced Personalization Evaluation
 
-1. **兴趣匹配度** (40%权重) - 标题与用户兴趣的匹配程度
-2. **类别相关性** (20%权重) - 标题与新闻类别的相关性  
-3. **兴趣一致性** (25%权重) - 用户兴趣与新闻类别的一致性
-4. **历史相关性** (15%权重) - 考虑用户历史阅读偏好
+1. **Interest Matching** (40% weight) - Degree of headline matching with user interests
+2. **Category Relevance** (20% weight) - Relevance of headline to news category
+3. **Interest Consistency** (25% weight) - Consistency between user interests and news category
+4. **Historical Relevance** (15% weight) - Considers user historical reading preferences
 
-### LLM质量评估
+### LLM Quality Evaluation
 
-使用推理模型进行5维度评估：
-- 准确性、吸引力、清晰度、合理性、创新性
+Uses reasoning models for 5-dimensional evaluation:
+- Accuracy, Attractiveness, Clarity, Reasonableness, Innovation
 
-### 综合评分
+### Comprehensive Scoring
 
-- ROUGE评分：25%
-- 个性化效果：35%
-- 标题质量：20%
-- LLM评估：20%
+- ROUGE Score: 25%
+- Personalization Effect: 35%
+- Headline Quality: 20%
+- LLM Evaluation: 20%
 
-## 📈 性能表现
+## Performance
 
-### 评估指标改进
+### Evaluation Metric Improvements
 
-| 评估指标 | 原版本 | 增强版 | 改进说明 |
+| Evaluation Metric | Original Version | Enhanced Version | Improvement Description |
 |---------|--------|--------|----------|
-| 个性化匹配度 | ~0.01 | ~0.35+ | 评估算法科学化 |
-| 类别相关性 | ~0.00 | ~0.42+ | 新增语义匹配 |
-| 标题质量评估 | 基于规则 | LLM评估 | 更客观准确 |
-| 综合评分 | 0.31 | 0.45+ | 多维度评估 |
+| Personalization Matching | ~0.01 | ~0.35+ | Scientific evaluation algorithm |
+| Category Relevance | ~0.00 | ~0.42+ | Added semantic matching |
+| Headline Quality Evaluation | Rule-based | LLM evaluation | More objective and accurate |
+| Comprehensive Score | 0.31 | 0.45+ | Multi-dimensional evaluation |
 
-### 系统优势
+### System Advantages
 
-- **🔒 安全性**：API密钥安全存储，不会意外泄露
-- **⚡ 效率**：智能批量处理，成本可控
-- **🎯 准确性**：改进的评估方法更科学客观
-- **🔧 灵活性**：支持多模型，便于横向比较
-- **📊 全面性**：多维度评估，综合反映系统性能
+- **Security**: Secure API key storage, no accidental leakage
+- **Efficiency**: Intelligent batch processing, controllable costs
+- **Accuracy**: Improved evaluation methods more scientific and objective
+- **Flexibility**: Multi-model support, convenient for horizontal comparison
+- **Comprehensiveness**: Multi-dimensional evaluation, comprehensive reflection of system performance
 
-## 💡 使用建议
+## Usage Recommendations
 
-1. **首次使用**：运行完整的Jupyter Notebook流程
-2. **日常开发**：使用main.py进行批量处理
-3. **模型对比**：在配置文件中添加新模型进行比较
-4. **效果优化**：根据评估结果调整提示词设计
+1. **First Use**: Run complete Jupyter Notebook process
+2. **Daily Development**: Use main.py for batch processing
+3. **Model Comparison**: Add new models in configuration file for comparison
+4. **Effect Optimization**: Adjust prompt design based on evaluation results
 
-## 🔍 技术细节
+## Technical Details
 
-### API配置安全性
+### API Configuration Security
 
-- 敏感信息存储在独立文件中
-- 自动添加到.gitignore，防止意外提交
-- 支持环境变量配置
+- Sensitive information stored in independent files
+- Automatically added to .gitignore, preventing accidental commits
+- Supports environment variable configuration
 
-### 多模型支持
+### Multi-model Support
 
 ```python
-# 动态切换模型
+# Dynamic model switching
 from llm_client import LLMClient
 client = LLMClient(model_name="deepseek-r1-0528")
 client.switch_model("deepseek-chat-v3-0324")
 ```
 
-### 增强版评估
+### Enhanced Evaluation
 
 ```python
-# 使用评估器
+# Using evaluator
 from evaluator import Evaluator
 evaluator = Evaluator(use_llm_evaluation=True)
 results = evaluator.comprehensive_evaluation(data)
 ```
 
-## 🚧 未来规划
+## Future Plans
 
-- [ ] 支持更多大模型API
-- [ ] 实现在线学习和反馈优化
-- [ ] 增加多语言支持
-- [ ] 开发Web界面
-- [ ] 集成更多评估指标
+- [ ] Support more large model APIs
+- [ ] Implement online learning and feedback optimization
+- [ ] Add multi-language support
+- [ ] Develop Web interface
+- [ ] Integrate more evaluation metrics
 
-## 📝 更新日志
+## Update Log
 
-### v2.0.0 (当前版本)
-- ✅ 重构API配置管理，提升安全性
-- ✅ 添加多模型支持和动态切换
-- ✅ 改进个性化评估算法（4维度评估）
-- ✅ 引入LLM质量评估功能
-- ✅ 升级综合评分体系
-- ✅ 优化Jupyter Notebook流程
+### v2.0.0 (Current Version)
+- Refactored API configuration management, improved security
+- Added multi-model support and dynamic switching
+- Improved personalization evaluation algorithm (4-dimensional evaluation)
+- Introduced LLM quality evaluation functionality
+- Upgraded comprehensive scoring system
+- Optimized Jupyter Notebook process
 
-### v1.0.0 (原始版本)
-- 基础个性化标题生成功能
-- ROUGE评估支持
-- 简单的个性化效果评估
+### v1.0.0 (Original Version)
+- Basic personalized headline generation functionality
+- ROUGE evaluation support
+- Simple personalization effect evaluation
 
-## 🤝 贡献指南
+## Contribution Guidelines
 
-欢迎提交Issue和Pull Request来改进本项目！
+Welcome to submit Issues and Pull Requests to improve this project!
 
-## 📄 许可证
+## License
 
-本项目采用MIT许可证。 
+This project uses the MIT license. 
