@@ -85,7 +85,7 @@
 \end{figure}
 
 \textbf{个性化生成器（Generator）：}
-该组件是整个系统的最终执行单元，其主要任务是融合来自 Preprocess 的结构化数据与 UserEncoder 提供的用户兴趣向量，生成既符合新闻内容又契合用户偏好的个性化新闻标题。该组件采用现代自然语言生成任务中经典的"预训练-微调"两阶段策略，由多个功能模块组成并通过 pipeline\_pretrain\_train\_test.ipynb 统一调度。首先，配置文件 config.json 提供了模型结构与训练超参数的全局定义；数据加载模块 data.py 负责将结构化数据转化为适用于训练的 PyTorch Dataset，其中 Seq2SeqDataset 用于通用预训练，ImpressionDataset 则加载用户点击历史与新闻向量用于个性化微调。模型的底层构件分布于 encoder.py、decoder\_pointer.py 与 modules.py 中，分别定义了编码器、带指针机制的解码器以及通用注意力层，实现了输入新闻文本的有效表示与个性化控制能力。model.py 中的 HeadlineGen 类则将上述模块整合为一个可训练的完整模型，其 forward 函数实现了对新闻文本的编码、结合用户兴趣向量解码生成标题的全过程。训练逻辑由 train.py 和 eval.py 等模块提供支持，封装了优化器、损失函数、微调逻辑、性能评估与 Beam Search 生成策略。整个训练与评估过程在 Jupyter Notebook 中有序展开：首先利用 Seq2SeqDataset 进行预训练，学习一般性标题生成能力；随后加载训练好的 UserEncoder 模型进行微调，将用户兴趣向量注入生成流程，从而实现真正的个性化生成，并将最终模型保存在 runs/ 目录（如图\ref{fig:model_weight}）。
+该组件是整个系统的最终执行单元，其主要任务是融合来自 Preprocess 的结构化数据与 UserEncoder 提供的用户兴趣向量，生成既符合新闻内容又契合用户偏好的个性化新闻标题。该组件采用现代自然语言生成任务中经典的"预训练-微调"两阶段策略，由多个功能模块组成，并且通过训练流水线文件 pipeline\_pretrain\_train\_test.ipynb 统一调度。首先，配置文件 config.json 提供了模型结构与训练超参数的全局定义；数据加载模块 data.py 负责将结构化数据转化为适用于训练的 PyTorch Dataset，其中 Seq2SeqDataset 用于通用预训练，ImpressionDataset 则加载用户点击历史与新闻向量用于个性化微调。模型的底层构件分布于 encoder.py、decoder\_pointer.py 与 modules.py 中，分别定义了编码器、带指针机制的解码器以及通用注意力层，实现了输入新闻文本的有效表示与个性化控制能力。model.py 中的 HeadlineGen 类则将上述模块整合为一个可训练的完整模型，其 forward 函数实现了对新闻文本的编码、结合用户兴趣向量解码生成标题的全过程。训练逻辑由 train.py 和 eval.py 等模块提供支持，封装了优化器、损失函数、微调逻辑、性能评估与 Beam Search 生成策略。整个训练与评估过程在 Jupyter Notebook 中有序展开：首先利用 Seq2SeqDataset 进行预训练，学习一般性标题生成能力；随后加载训练好的 UserEncoder 模型进行微调，将用户兴趣向量注入生成流程，从而实现真正的个性化生成，并将最终模型保存在 runs/ 目录（如图\ref{fig:model_weight}）。
 
 \begin{figure}[H]
   \centering
