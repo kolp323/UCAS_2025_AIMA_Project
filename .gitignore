@@ -5,6 +5,7 @@
 *.h5
 *.ckpt
 *.txt
+!requirements.txt
 *.tsv
 *.csv
 *.xlsx
