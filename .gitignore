@@ -1,15 +1,4 @@
-*.npy
-*.pkl
-*.pth
-*.pt
-*.h5
-*.ckpt
-*.txt
 !requirements.txt
-*.tsv
-*.csv
-*.xlsx
-*.zip
 __pycache__/
 *.py[cod]
 *.egg-info/
